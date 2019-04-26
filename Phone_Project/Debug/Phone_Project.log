@@ -1,0 +1,24 @@
+﻿  GUI.cpp
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\gui.h(107): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(112): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(117): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(565): warning C4101: “e”: 未引用的局部变量
+d:\c++\phone_project\phone_project\gui\include\graph.h(130): warning C4018: “<”: 有符号/无符号不匹配
+  d:\c++\phone_project\phone_project\gui\include\graph.h(130): note: 编译 类 模板 成员函数 "Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)" 时
+  d:\c++\phone_project\phone_project\gui\include\gui.h(97): note: 参见对正在编译的函数 模板 实例化“Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)”的引用
+  d:\c++\phone_project\phone_project\gui\include\gui.h(99): note: 参见对正在编译的 类 模板 实例化 "Graph_lib::Vector_ref<Graph_lib::Button>" 的引用
+d:\c++\phone_project\phone_project\gui\include\gui.h(180): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  d:\c++\phone_project\phone_project\gui\src\gui.cpp(501): note: 参见对正在编译的函数 模板 实例化“Target Graph_lib::narrow_cast<int,double>(Source)”的引用
+          with
+          [
+              Target=int,
+              Source=double
+          ]
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(417): warning C4715: “Graph_lib::Token_stream::get”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(475): warning C4715: “Graph_lib::primary”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(569): warning C4715: “Graph_lib::calculate”: 不是所有的控件路径都返回值
+  Phone_Project.vcxproj -> D:\C++\Phone_Project\Debug\Phone_Project.exe

@@ -581,4 +581,41 @@ void Cal_Window::cal()
 	redraw();
 }
 //------------------------------------------------------------------------------
+Phone::Phone() :
+	Window(Point(100, 100), 700, 700, "Phone"),
+	phone_fraction(Point(50, 50), "C:\\Users\\GaoJihang\\Desktop\\fraction.jpg"),
+	//D : \\C++\\Phone_Project\\images\\fraction.png
+	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home),
+	Lock_button(Point(368, 100), 5, 53, "", cb_switchon),
+	open_screen(Point(80, 113), "C:\\Users\\GaoJihang\\Desktop\\bg.jpg")
+{
+	attach(Lock_button);
+	phone_fraction.set_img(Point(50, 50), 500, 500);
+	attach(phone_fraction);
+	//attach(open_screen);
+	
+	screen_status = off;
+}
+
+void Phone::cb_switchon(Address, Address pw)
+{
+	reference_to<Phone>(pw).switchon();
+}
+void Phone::switchon()
+{
+	open_screen.set_img(Point(80, 113), 500, 500);
+	attach(open_screen);
+	redraw();
+}
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+
+
+//------------------------------------------------------------------------------
 }; // of namespace Graph_lib

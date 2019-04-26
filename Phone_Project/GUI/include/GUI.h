@@ -190,11 +190,32 @@ namespace Graph_lib {
 	{
 		Phone();
 	private:
-		Button up_button;
-		Button down_button;
-		Button home_button;
+		//Button up_button;
+		//Button down_button;
+		//Button home_button;
 		Button Lock_button;
-
+		//Button Mute_button;
+		Image phone_fraction;
+		Image open_screen;
+		//Image Info_box;
+		//Out_box time_output;
+		//void switchoff();
+		//static void cb_switchoff(Address, Address);
+		void switchon();
+		static void cb_switchon(Address, Address);
+		//void soundup();
+		//static void cb_soundup(Address, Address);
+		//void sounddn();
+		//static void cb_sounddn(Address, Address);
+		//void back_to_home();
+		//static void cb_back_to_home(Address, Address);
+		//void lock();
+		//static void cb_lock(Address, Address);
+		//void open();
+		//static void cb_open(Address, Address);
+		bool screen_status;
+		const bool off = true;
+		const bool on = false;
 	};
 
 //------------------------------------------------------------------------------

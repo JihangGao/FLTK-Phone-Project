@@ -367,7 +367,7 @@ struct Mark : Marks {
 //------------------------------------------------------------------------------
 
 struct Suffix {
-    enum Encoding { none, jpg, gif  };
+    enum Encoding { none, jpg, gif, png  };
 };
 
 Suffix::Encoding get_encoding(const string& s);

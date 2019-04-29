@@ -24,6 +24,8 @@
 #define locked 3
 #define desktop 4
 #define inapp 5
+#define muted 0
+#define sounded 1
 namespace Graph_lib {
 
 //------------------------------------------------------------------------------
@@ -587,30 +589,56 @@ void Cal_Window::cal()
 //------------------------------------------------------------------------------
 Phone::Phone() :
 	Window(Point(100, 100), 700, 700, "Phone"),
-	phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
-	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home),
-	Lock_button(Point(323, 120), 4, 45, "", cb_switchon),
-	lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
-	closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg")
+	Phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
+	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home)
+	Lock_button(Point(321, 120), 6, 45, "", cb_switchon),
+	Lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
+	Closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg"),
+	Starting_screen(Point(27,75), "D:\\C++\\Phone_Project\\images\\starting.jpg"),
+	Up_button(Point(4, 121), 10, 41, "", cb_soundup),
+	Down_button(Point(4, 174), 10, 41, "", cb_sounddn),
+	Mute_button(Point(5, 74), 8, 32, "", cb_mute),
+	Current_Screen_state(Point(500, 500), 100, 40, "Current Screen State:"),
+	Current_Sound_state(Point(500, 400), 100, 40, "Current Sound State:")
 {
 	attach(Lock_button);
-	attach(phone_fraction);
-	attach(closed_screen);
+	attach(Up_button);
+	attach(Down_button);
+	attach(Mute_button);
+	attach(Phone_fraction);
+	attach(Closed_screen);
+	attach(Current_Screen_state);
+	attach(Current_Sound_state);
+	Current_Screen_state.put("Power off");
 	//attach(open_screen);
-	screen_status = poweroff;
+	Sound_saved = 8;
+	Screen_status = poweroff;
+	Sound_status = sounded;
 }
 
 void Phone::cb_switchon(Address, Address pw)
 {
-		reference_to<Phone>(pw).switchon();
+	reference_to<Phone>(pw).switchon();
 }
 void Phone::switchon()
 {
-	switch (screen_status) {
+	switch (Screen_status) {
 		
-	case poweroff: screen_status = locked; detach(closed_screen); attach(lock_screen); redraw(); break;
-	case locked: screen_status = closed; detach(lock_screen); attach(closed_screen); redraw(); break;
-	case closed: screen_status = locked; detach(closed_screen); attach(lock_screen); redraw(); break;
+	case poweroff: Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
+				   Sleep(2000); Screen_status = locked; detach(Starting_screen); attach(Lock_screen);  Current_Screen_state.put("locked open"); redraw();
+				   break;
+	case locked: Screen_status = closed; detach(Lock_screen); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+	case closed: Screen_status = locked; detach(Closed_screen); attach(Lock_screen); Current_Screen_state.put("locked open"); redraw(); break;
+	}
+}
+void Phone::cb_mute(Address, Address pw)
+{
+	reference_to<Phone>(pw).mute();
+}
+void Phone::mute()
+{
+	switch (Sound_status) {
+	case muted:
 	}
 }
 //------------------------------------------------------------------------------

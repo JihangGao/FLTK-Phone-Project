@@ -3,11 +3,10 @@
 // This is a GUI support code to the chapters 12-16 of the book
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
-
+#include "GUI.h"
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Output.H>
-#include "GUI.h"
 #include <random>
 #include <Windows.h>
 #include <algorithm>
@@ -19,7 +18,12 @@
 #include <string>
 #include <sstream>
 #include <vector>
-
+#define poweroff 0
+#define starting 1
+#define closed 2
+#define locked 3
+#define desktop 4
+#define inapp 5
 namespace Graph_lib {
 
 //------------------------------------------------------------------------------
@@ -583,29 +587,31 @@ void Cal_Window::cal()
 //------------------------------------------------------------------------------
 Phone::Phone() :
 	Window(Point(100, 100), 700, 700, "Phone"),
-	phone_fraction(Point(50, 50), "C:\\Users\\GaoJihang\\Desktop\\fraction.jpg"),
-	//D : \\C++\\Phone_Project\\images\\fraction.png
+	phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
 	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home),
-	Lock_button(Point(368, 100), 5, 53, "", cb_switchon),
-	open_screen(Point(80, 113), "C:\\Users\\GaoJihang\\Desktop\\bg.jpg")
+	Lock_button(Point(323, 120), 4, 45, "", cb_switchon),
+	lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
+	closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg")
 {
 	attach(Lock_button);
-	phone_fraction.set_img(Point(50, 50), 500, 500);
 	attach(phone_fraction);
+	attach(closed_screen);
 	//attach(open_screen);
-	
-	screen_status = off;
+	screen_status = poweroff;
 }
 
 void Phone::cb_switchon(Address, Address pw)
 {
-	reference_to<Phone>(pw).switchon();
+		reference_to<Phone>(pw).switchon();
 }
 void Phone::switchon()
 {
-	open_screen.set_img(Point(80, 113), 500, 500);
-	attach(open_screen);
-	redraw();
+	switch (screen_status) {
+		
+	case poweroff: screen_status = locked; detach(closed_screen); attach(lock_screen); redraw(); break;
+	case locked: screen_status = closed; detach(lock_screen); attach(closed_screen); redraw(); break;
+	case closed: screen_status = locked; detach(closed_screen); attach(lock_screen); redraw(); break;
+	}
 }
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------

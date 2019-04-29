@@ -196,7 +196,8 @@ namespace Graph_lib {
 		Button Lock_button;
 		//Button Mute_button;
 		Image phone_fraction;
-		Image open_screen;
+		Image lock_screen;
+		Image closed_screen;
 		//Image Info_box;
 		//Out_box time_output;
 		//void switchoff();
@@ -213,7 +214,7 @@ namespace Graph_lib {
 		//static void cb_lock(Address, Address);
 		//void open();
 		//static void cb_open(Address, Address);
-		bool screen_status;
+		int screen_status;
 		const bool off = true;
 		const bool on = false;
 	};

@@ -1,3 +1,4 @@
 interesting eepa hw~
 using FLTK & GUI
-NOT FINISHED YET
+lock_screen finished
+open and closed finished

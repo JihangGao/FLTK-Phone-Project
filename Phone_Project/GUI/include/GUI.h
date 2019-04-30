@@ -190,6 +190,7 @@ namespace Graph_lib {
 	{
 		Phone();
 	private:
+		Image & show_sound(int);
 		Button Up_button;
 		Button Down_button;
 		//Button home_button;
@@ -199,6 +200,23 @@ namespace Graph_lib {
 		Image Lock_screen;
 		Image Closed_screen;
 		Image Starting_screen;
+		Image Sound_screen_0;
+		Image Sound_screen_1;
+		Image Sound_screen_2;
+		Image Sound_screen_3;
+		Image Sound_screen_4;
+		Image Sound_screen_5;
+		Image Sound_screen_6;
+		Image Sound_screen_7;
+		Image Sound_screen_8;
+		Image Sound_screen_9;
+		Image Sound_screen_10;
+		Image Sound_screen_11;
+		Image Sound_screen_12;
+		Image Sound_screen_13;
+		Image Sound_screen_14;
+		Image Sound_screen_15;
+		Image Sound_screen_16;
 		Out_box Current_Screen_state;
 		Out_box Current_Sound_state;
 		//Image Info_box;

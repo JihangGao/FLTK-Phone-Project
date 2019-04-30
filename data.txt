@@ -7,4 +7,4 @@ dn 4x174
 home 50x50 139x578
 dianchi 276x17 28x75
 app 50x50
-sound 108x108
+sound 108x108 90x196

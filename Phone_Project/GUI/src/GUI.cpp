@@ -25,7 +25,6 @@
 #define desktop 4
 #define inapp 5
 #define muted 0
-#define sounded 1
 namespace Graph_lib {
 
 //------------------------------------------------------------------------------
@@ -594,12 +593,29 @@ Phone::Phone() :
 	Lock_button(Point(321, 120), 6, 45, "", cb_switchon),
 	Lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
 	Closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg"),
-	Starting_screen(Point(27,75), "D:\\C++\\Phone_Project\\images\\starting.jpg"),
+	Starting_screen(Point(27,75), "D:\\C++\\Phone_Project\\images\\starting.gif"),
 	Up_button(Point(4, 121), 10, 41, "", cb_soundup),
 	Down_button(Point(4, 174), 10, 41, "", cb_sounddn),
 	Mute_button(Point(5, 74), 8, 32, "", cb_mute),
 	Current_Screen_state(Point(500, 500), 100, 40, "Current Screen State:"),
-	Current_Sound_state(Point(500, 400), 100, 40, "Current Sound State:")
+	Current_Sound_state(Point(500, 400), 100, 40, "Current Sound State:"),
+	Sound_screen_0(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s0.jpg"),
+	Sound_screen_1(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s1.jpg"),
+	Sound_screen_2(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s2.jpg"),
+	Sound_screen_3(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s3.jpg"),
+	Sound_screen_4(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s4.jpg"),
+	Sound_screen_5(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s5.jpg"),
+	Sound_screen_6(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s6.jpg"),
+	Sound_screen_7(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s7.jpg"),
+	Sound_screen_8(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s8.jpg"),
+	Sound_screen_9(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s9.jpg"),
+	Sound_screen_10(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s10.jpg"),
+	Sound_screen_11(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s11.jpg"),
+	Sound_screen_12(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s12.jpg"),
+	Sound_screen_13(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s13.jpg"),
+	Sound_screen_14(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s14.jpg"),
+	Sound_screen_15(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s15.jpg"),
+	Sound_screen_16(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s16.jpg")
 {
 	attach(Lock_button);
 	attach(Up_button);
@@ -613,9 +629,29 @@ Phone::Phone() :
 	//attach(open_screen);
 	Sound_saved = 8;
 	Screen_status = poweroff;
-	Sound_status = sounded;
+	Sound_status = 8;
 }
-
+Image& Phone::show_sound(int i) {
+	switch (i) {
+	case 0: return Sound_screen_0;
+	case 1: return Sound_screen_1;
+	case 2: return Sound_screen_2;
+	case 3: return Sound_screen_3;
+	case 4: return Sound_screen_4;
+	case 5: return Sound_screen_5;
+	case 6: return Sound_screen_6;
+	case 7: return Sound_screen_7;
+	case 8: return Sound_screen_8;
+	case 9: return Sound_screen_9;
+	case 10: return Sound_screen_10;
+	case 11: return Sound_screen_11;
+	case 12: return Sound_screen_12;
+	case 13: return Sound_screen_13;
+	case 14: return Sound_screen_14;
+	case 15: return Sound_screen_15;
+	case 16: return Sound_screen_16;
+	}
+}
 void Phone::cb_switchon(Address, Address pw)
 {
 	reference_to<Phone>(pw).switchon();
@@ -625,7 +661,7 @@ void Phone::switchon()
 	switch (Screen_status) {
 		
 	case poweroff: Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
-				   Sleep(2000); Screen_status = locked; detach(Starting_screen); attach(Lock_screen);  Current_Screen_state.put("locked open"); redraw();
+				   Sleep(20000); Screen_status = locked; detach(Starting_screen); attach(Lock_screen);  Current_Screen_state.put("locked open"); redraw();
 				   break;
 	case locked: Screen_status = closed; detach(Lock_screen); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	case closed: Screen_status = locked; detach(Closed_screen); attach(Lock_screen); Current_Screen_state.put("locked open"); redraw(); break;
@@ -637,8 +673,50 @@ void Phone::cb_mute(Address, Address pw)
 }
 void Phone::mute()
 {
-	switch (Sound_status) {
-	case muted:
+	if (Screen_status != poweroff || Screen_status != closed) {
+		switch (Sound_status) {
+		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(Sound_status)); break;
+		default: Sound_status = muted; attach(show_sound(muted)); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(muted)); break;
+		}
+	};
+	return;
+}
+void Phone::cb_soundup(Address, Address pw)
+{
+	reference_to<Phone>(pw).soundup();
+}
+void Phone::soundup()
+{
+	stringstream in;
+	if (Screen_status != poweroff && Screen_status != closed) {
+		switch (Sound_status) {
+		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); Current_Sound_state.put("muted"); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(Sound_status)); break;
+		case 16: attach(show_sound(16)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(16)); break;
+		default: Sound_saved = (Sound_status += 1); attach(show_sound(Sound_status)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(Sound_status)); break;
+		}
+	}
+}
+void Phone::cb_sounddn(Address, Address pw)
+{
+	reference_to<Phone>(pw).sounddn();
+}
+void Phone::sounddn()
+{
+	stringstream in;
+	if (Screen_status != poweroff && Screen_status != closed) {
+		switch (Sound_status) {
+		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(Sound_status)); break;
+		case 1: Sound_status = muted; attach(show_sound(muted)); Current_Sound_state.put("muted"); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(muted)); break;
+		default: Sound_saved = (Sound_status -= 1); attach(show_sound(Sound_status)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
+			Sleep(400); detach(show_sound(Sound_status)); break;
+		}
 	}
 }
 //------------------------------------------------------------------------------

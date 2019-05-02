@@ -13,7 +13,7 @@
 namespace Graph_lib {
 
 Window::Window(int ww, int hh, const string& title)
-    :Fl_Window(ww,hh,title.c_str()),w(ww),h(hh)
+    :Fl_Double_Window(ww,hh,title.c_str()),w(ww),h(hh)
 {
     init();
 }
@@ -21,7 +21,7 @@ Window::Window(int ww, int hh, const string& title)
 //------------------------------------------------------------------------------
 
 Window::Window(Point xy, int ww, int hh, const string& title)
-    :Fl_Window(xy.x,xy.y,ww,hh,title.c_str()),w(ww),h(hh)
+    :Fl_Double_Window(xy.x,xy.y,ww,hh,title.c_str()),w(ww),h(hh)
 { 
     init();
 }
@@ -43,7 +43,7 @@ void Window::wait()
 }
 void Window::draw()
 {
-    Fl_Window::draw();
+	Fl_Double_Window::draw();
     for (unsigned int i=0; i<shapes.size(); ++i) shapes[i]->draw();
 }
 
@@ -51,16 +51,16 @@ void Window::draw()
 
 void Window::attach(Widget& w)
 {
-    begin();         // FTLK: begin attaching new Fl_Wigets to this window
-    w.attach(*this); // let the Widget create its Fl_Wigits
-    end();           // FTLK: stop attaching new Fl_Wigets to this window
+	begin();         // FTLK: begin attaching new Fl_Wigets to this window
+	w.attach(*this); // let the Widget create its Fl_Wigits
+	end();           // FTLK: stop attaching new Fl_Wigets to this window
 }
 
 //------------------------------------------------------------------------------
 
 void Window::detach(Widget& b)
 {
-    b.hide();
+	b.hide();
 }
 
 //------------------------------------------------------------------------------

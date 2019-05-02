@@ -9,7 +9,9 @@
 
 #include "Window.h"
 #include "Graph.h"
-
+#include <FL\Fl_Button.H>
+#include <FL/Fl_Widget.H>
+#include <iostream>
 namespace Graph_lib {
 
 //------------------------------------------------------------------------------
@@ -27,34 +29,34 @@ namespace Graph_lib {
 
 //------------------------------------------------------------------------------
 
-    class Widget {
-    // Widget is a handle to an Fl_widget - it is *not* an Fl_widget
-    // We try to keep our interface classes at arm's length from FLTK
-    public:
-        Widget(Point xy, int w, int h, const string& s, Callback cb)
-            : loc(xy), width(w), height(h), label(s), do_it(cb)
-        {}
+	class Widget {
+		// Widget is a handle to an Fl_widget - it is *not* an Fl_widget
+		// We try to keep our interface classes at arm's length from FLTK
+	public:
+		Widget(Point xy, int w, int h, const string& s, Callback cb)
+			: loc(xy), width(w), height(h), label(s), do_it(cb)
+		{}
 
-        virtual void move(int dx,int dy) { hide(); pw->position(loc.x+=dx, loc.y+=dy); show(); }
-        virtual void hide() { pw->hide(); }
-        virtual void show() { pw->show(); }
-        virtual void attach(Window&) = 0;
+		virtual void move(int dx, int dy) { hide(); pw->position(loc.x += dx, loc.y += dy); show(); }
+		virtual void hide() { pw->hide(); }
+		virtual void show() { pw->show(); }
+		virtual void attach(Window&) = 0;
 
-        Point loc;
-        int width;
-        int height;
-        string label;
-        Callback do_it;
+		Point loc;
+		int width;
+		int height;
+		string label;
+		Callback do_it;
 
-        virtual ~Widget() { }
+		virtual ~Widget() { }
 
-    protected:
-        Window* own;    // every Widget belongs to a Window
-        Fl_Widget* pw;  // connection to the FLTK Widget
-    private:
-        Widget& operator=(const Widget&); // don't copy Widgets
-        Widget(const Widget&);
-    };
+	protected:
+		Window * own;    // every Widget belongs to a Window
+		Fl_Widget* pw;  // connection to the FLTK Widget
+	private:
+		Widget & operator=(const Widget&); // don't copy Widgets
+		Widget(const Widget&);
+	};
 
 //------------------------------------------------------------------------------
 
@@ -66,6 +68,13 @@ namespace Graph_lib {
         void attach(Window&);
     };
 
+	struct appButton : Widget {
+		appButton(Point xy, int w, int h, const string& label, Callback cb)
+			: Widget(xy, w, h, label, cb)
+		{}
+
+		void attach(Window&);
+	};
 //------------------------------------------------------------------------------
 
     struct In_box : Widget {
@@ -185,21 +194,72 @@ namespace Graph_lib {
 		return tgt;
 	}
 //------------------------------------------------------------------------------
+	class MyApp : public Fl_Button
+	{
+		
+	public:
+		void draw();
+		MyApp(int x, int y, int w, int h, const char* l = 0)
+			:Fl_Button(x, y, w, h, l)
+		{}
+		int handle(int e) {
+			switch (e) {
+				case FL_PUSH:
+					cout << endl << "Button C callback!" << endl;
+					show();
+					do_callback();
+					break;
+				case FL_RELEASE:
+					cout << endl << "Button A callback!" << endl;
+					break;
+				default: return 0;
+			}
+			
+			return(Fl_Button::handle(e));
+
+		};
+	};
+
+//------------------------------------------------------------------------------
 	//PLUG FUNCTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	struct Phone : Window
 	{
 		Phone();
 	private:
-		Image & show_sound(int);
+		appButton pass_1;
+		appButton pass_2;
+		appButton pass_3;
+		appButton pass_4;
+		appButton pass_5;
+		appButton pass_6;
+		appButton pass_7;
+		appButton pass_8;
+		appButton pass_9;
+		appButton pass_0;
+		//Button passcancel;
 		Button Up_button;
 		Button Down_button;
 		//Button home_button;
 		Button Lock_button;
 		Button Mute_button;
+		Button home_button;
+		Image Password;
+		Image p0;
+		Image p1;
+		Image p2;
+		Image p3;
+		Image p4;
+		Image p5;
+		Image p6;
+		Image p7;
+		Image p8;
+		Image p9;
 		Image Phone_fraction;
 		Image Lock_screen;
 		Image Closed_screen;
 		Image Starting_screen;
+		Image Desktop;
+		Image password_screen;
 		Image Sound_screen_0;
 		Image Sound_screen_1;
 		Image Sound_screen_2;
@@ -217,11 +277,22 @@ namespace Graph_lib {
 		Image Sound_screen_14;
 		Image Sound_screen_15;
 		Image Sound_screen_16;
+		Image pass_titlewrong;
 		Out_box Current_Screen_state;
 		Out_box Current_Sound_state;
+		Out_box password_state;
+		Image pass_title0;
+		Image pass_title1;
+		Image pass_title2;
+		Image pass_title3;
+		Image pass_title4;
 		//Image Info_box;
 		//Out_box time_output;
+		Image& show_sound(int);
+		void home();
+		static void cb_home(Address, Address);
 		void switchon();
+		//static void cb_home(Fl_Widget*, void*);
 		static void cb_switchon(Address, Address);
 		void soundup();
 		static void cb_soundup(Address, Address);
@@ -229,11 +300,50 @@ namespace Graph_lib {
 		static void cb_sounddn(Address, Address);
 		void mute();
 		static void cb_mute(Address, Address);
+		Image& pass_title(int i) {
+			switch (i) {
+			case 0: return pass_title0;
+			case 1: return pass_title1;
+			case 2: return pass_title2;
+			case 3: return pass_title3;
+			case 4: return pass_title4;
+			}
+		}
+		void pass1();
+		void pass2();
+		void pass3();
+		void pass4();
+		void pass5();
+		void pass6();
+		void pass7();
+		void pass8();
+		void pass9();
+		void pass0();
+		//void pass_cancel();
+		void unlock();
+		void detach_unlock(int);
+		void attach_unlock();
+		//static void cb_pass_cancel(Address, Address);
+		static void cb_pass1(Address, Address);
+		static void cb_pass2(Address, Address);
+		static void cb_pass3(Address, Address);
+		static void cb_pass4(Address, Address);
+		static void cb_pass5(Address, Address);
+		static void cb_pass6(Address, Address);
+		static void cb_pass7(Address, Address);
+		static void cb_pass8(Address, Address);
+		static void cb_pass9(Address, Address);
+		static void cb_pass0(Address, Address);
 		//void back_to_home();
 		//static void cb_back_to_home(Address, Address); 
 		int Sound_status;
 		int Sound_saved;
 		int Screen_status;
+		int lock_condition[10] = {1,1,1,1,1,1,1,1,1,1};
+		int lock_count = 0;
+		int password[4] = { 0 };
+		int pass_word[4] = { 1,2,3,4 };
+		stringstream sss;
 	};
 
 //------------------------------------------------------------------------------

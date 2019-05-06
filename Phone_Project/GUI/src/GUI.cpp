@@ -642,7 +642,6 @@ Phone::Phone() :
 	Sound_screen_14(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s14.jpg"),
 	Sound_screen_15(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s15.jpg"),
 	Sound_screen_16(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s16.jpg"),
-	password_screen(Point(27, 105), "D:\\C++\\Phone_Project\\images\\password.jpg"),
 	p1(Point(61, 226), "D:\\C++\\Phone_Project\\images\\p1.jpg"),
 	pass_1(Point(61, 226), 56, 56, "", cb_pass1),
 	p2(Point(137, 226), "D:\\C++\\Phone_Project\\images\\p2.jpg"),
@@ -663,8 +662,7 @@ Phone::Phone() :
 	pass_9(Point(213, 359), 56, 56, "", cb_pass9),
 	p0(Point(137, 425), "D:\\C++\\Phone_Project\\images\\p0.jpg"),
 	pass_0(Point(137, 425), 56, 56, "", cb_pass0),
-	Password(Point(27, 105), "D:\\C++\\Phone_Project\\images\\password.jpg"),
-	//passcancel(Point(220, 527), 42, 18, "", cb_pass_cancel),
+	Password(Point(27, 75), "D:\\C++\\Phone_Project\\images\\password.jpg"),
 	pass_title1(Point(27,135), "D:\\C++\\Phone_Project\\images\\pass_title1.jpg"),
 	pass_title2(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title2.jpg"),
 	pass_title3(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title3.jpg"),
@@ -672,8 +670,9 @@ Phone::Phone() :
 	pass_title0(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title0.jpg"),
 	pass_titlewrong(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_titlewrong.jpg"),
 	Desktop(Point(27, 75), "D:\\C++\\Phone_Project\\images\\desktop.jpg"),
-	home_button(Point(400, 200), 50, 50, "home", cb_home),
-	password_state(Point(400, 0), 100, 40, "password")
+	home_button(Point(139, 578), 50, 50, "home", cb_home),
+	password_state(Point(400, 0), 100, 40, "password"),
+	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete)
 {
 	attach(Lock_button);
 	attach(Up_button);
@@ -711,6 +710,7 @@ void Phone::detach_unlock(int i)
 	password[2] = 0;
 	password[3] = 0;
 	lock_count = 0;
+	detach(passdelete);
 	detach(pass_title(i));
 	detach(pass_0);
 	detach(pass_1);
@@ -722,11 +722,11 @@ void Phone::detach_unlock(int i)
 	detach(pass_7);
 	detach(pass_8);
 	detach(pass_9);
-	//detach(passcancel);
 	detach(Password);
 }
 void Phone::attach_unlock()
 {
+	attach(passdelete);
 	attach(pass_0);
 	attach(pass_1);
 	attach(pass_2);
@@ -737,7 +737,6 @@ void Phone::attach_unlock()
 	attach(pass_7);
 	attach(pass_8);
 	attach(pass_9);
-	//attach(passcancel);
 	attach(Password);
 }
 
@@ -1262,7 +1261,31 @@ void Phone::pass9()
 		}
 	}
 }
-
+void Phone::cb_pass_delete(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass_delete();
+}
+void Phone::pass_delete()
+{
+	if (lock_count) {
+		lock_count--;
+		attach(pass_title(lock_count));
+		detach(pass_title(lock_count + 1));
+		sss.str("");
+		for (int i = 0; i < lock_count; i++) {
+			sss << password[i];
+		}
+		password_state.put(sss.str());
+		redraw();
+	}
+	else {
+		detach_unlock(0);
+		Screen_status = locked;
+		attach(Lock_screen);
+		Current_Screen_state.put("locked open"); 
+		redraw();
+	}
+}
 
 
 

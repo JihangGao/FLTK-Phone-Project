@@ -236,7 +236,7 @@ namespace Graph_lib {
 		appButton pass_8;
 		appButton pass_9;
 		appButton pass_0;
-		//Button passcancel;
+		Button passdelete;
 		Button Up_button;
 		Button Down_button;
 		//Button home_button;
@@ -259,7 +259,6 @@ namespace Graph_lib {
 		Image Closed_screen;
 		Image Starting_screen;
 		Image Desktop;
-		Image password_screen;
 		Image Sound_screen_0;
 		Image Sound_screen_1;
 		Image Sound_screen_2;
@@ -319,11 +318,11 @@ namespace Graph_lib {
 		void pass8();
 		void pass9();
 		void pass0();
-		//void pass_cancel();
+		void pass_delete();
 		void unlock();
 		void detach_unlock(int);
 		void attach_unlock();
-		//static void cb_pass_cancel(Address, Address);
+		static void cb_pass_delete(Address, Address);
 		static void cb_pass1(Address, Address);
 		static void cb_pass2(Address, Address);
 		static void cb_pass3(Address, Address);

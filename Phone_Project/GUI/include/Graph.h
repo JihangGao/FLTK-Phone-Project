@@ -169,7 +169,7 @@ private:
     Line_style ls; 
     Color fcolor;                      // fill color
 
-    Shape(const Shape&);               // prevent copying
+	Shape(const Shape&);               // prevent copying
     Shape& operator=(const Shape&);
 };
 
@@ -446,7 +446,29 @@ struct Airplane : Shape
 	void draw_lines() const;
 };
 
+struct Time_Display : Shape
+{
+	Time_Display(Point(xy));
+	void draw_lines() const;
+	void get_time();
+private:
+	int currh;
+	int currm;
+	int currs;
+	string time_now;
+};
 
+struct Time_Display_2 : Shape
+{
+	Time_Display_2(Point(xy));
+	void draw_lines() const;
+	void get_time();
+private:
+	int currh;
+	int currm;
+	int currs;
+	string time_now;
+};
 //------------------------------------------------------------------------------
 } // of namespace Graph_lib
 

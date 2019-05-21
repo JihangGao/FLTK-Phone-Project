@@ -3,6 +3,7 @@
 // This is a GUI support code to the chapters 12-16 of the book
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
+#pragma warning(disable : 4996)
 #include "GUI.h"
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
@@ -46,6 +47,19 @@ void appButton::attach(Window& win)
 	own = &win;
 }
 
+void powerButton::attach(Window& win)
+{
+	pw = new power(loc.x, loc.y, width, height, label.c_str());
+	pw->callback(reinterpret_cast<Fl_Callback*>(do_it), &win); // pass the window
+	own = &win;
+}
+
+void timeButton::attach(Window& win)
+{
+	pw = new time_button(loc.x, loc.y, width, height, label.c_str());
+	pw->callback(reinterpret_cast<Fl_Callback*>(do_it), &win); // pass the window
+	own = &win;
+}
 //------------------------------------------------------------------------------
 
 int In_box::get_int()
@@ -611,14 +625,32 @@ void MyApp::draw()
 	else draw_label();
 	if (Fl::focus() == this) draw_focus();
 }
+void power::draw() {
+	if (type() == FL_HIDDEN_BUTTON) return;
+	Fl_Color col = value() ? selection_color() : color();
+	draw_box(value() ? (down_box() ? down_box() : fl_down(box())) : box(), col);
+	draw_backdrop();
+	if (labeltype() == FL_NORMAL_LABEL && value()) {
+		Fl_Color c = labelcolor();
+		labelcolor(fl_contrast(c, col));
+		draw_label();
+		labelcolor(c);
+	}
+	else draw_label();
+	if (Fl::focus() == this) draw_focus();
+}
 //------------------------------------------------------------------------------
 Phone::Phone() :
-	Window(Point(100, 100), 700, 700, "Phone"),
+	Window(Point(0, 0), 1024, 800, "Phone"),
 	Phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
 	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home)
 	Lock_button(Point(321, 120), 6, 45, "", cb_switchon),
 	Lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
 	Closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg"),
+	Starting_p0(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p0.jpg"),
+	Starting_p1(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p1.jpg"),
+	Starting_p2(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p2.jpg"),
+	Starting_p3(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p3.jpg"),
 	Starting_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting.jpg"),
 	Up_button(Point(4, 121), 10, 41, "", cb_soundup),
 	Down_button(Point(4, 174), 10, 41, "", cb_sounddn),
@@ -663,16 +695,133 @@ Phone::Phone() :
 	p0(Point(137, 425), "D:\\C++\\Phone_Project\\images\\p0.jpg"),
 	pass_0(Point(137, 425), 56, 56, "", cb_pass0),
 	Password(Point(27, 75), "D:\\C++\\Phone_Project\\images\\password.jpg"),
-	pass_title1(Point(27,135), "D:\\C++\\Phone_Project\\images\\pass_title1.jpg"),
+	pass_title1(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title1.jpg"),
 	pass_title2(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title2.jpg"),
 	pass_title3(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title3.jpg"),
 	pass_title4(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title4.jpg"),
 	pass_title0(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title0.jpg"),
 	pass_titlewrong(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_titlewrong.jpg"),
 	Desktop(Point(27, 75), "D:\\C++\\Phone_Project\\images\\desktop.jpg"),
-	home_button(Point(139, 578), 50, 50, "home", cb_home),
+	//home_button(Point(139, 578), 50, 50, "home", cb_home),
+	home_button(Point(500, 200), 50, 50, "home", cb_home),
 	password_state(Point(400, 0), 100, 40, "password"),
-	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete)
+	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete),
+	time_display(Point(101, 195)),
+	time_display_2(Point(150, 90)),
+	pro__0(Point(119 - 1, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_0(Point(119 + 0, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_1(Point(119 + 1, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_2(Point(119 + 2, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_3(Point(119 + 3, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_4(Point(119 + 4, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_5(Point(119 + 5, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_6(Point(119 + 6, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_7(Point(119 + 7, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_8(Point(119 + 8, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_9(Point(119 + 9, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_10(Point(119 + 10, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_11(Point(119 + 11, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_12(Point(119 + 12, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_13(Point(119 + 13, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_14(Point(119 + 14, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_15(Point(119 + 15, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_16(Point(119 + 16, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_17(Point(119 + 17, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_18(Point(119 + 18, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_19(Point(119 + 19, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_20(Point(119 + 20, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_21(Point(119 + 21, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_22(Point(119 + 22, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_23(Point(119 + 23, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_24(Point(119 + 24, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_25(Point(119 + 25, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_26(Point(119 + 26, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_27(Point(119 + 27, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_28(Point(119 + 28, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_29(Point(119 + 29, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_30(Point(119 + 30, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_31(Point(119 + 31, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_32(Point(119 + 32, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_33(Point(119 + 33, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_34(Point(119 + 34, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_35(Point(119 + 35, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_36(Point(119 + 36, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_37(Point(119 + 37, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_38(Point(119 + 38, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_39(Point(119 + 39, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_40(Point(119 + 40, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_41(Point(119 + 41, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_42(Point(119 + 42, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_43(Point(119 + 43, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_44(Point(119 + 44, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_45(Point(119 + 45, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_46(Point(119 + 46, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_47(Point(119 + 47, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_48(Point(119 + 48, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_49(Point(119 + 49, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_50(Point(119 + 50, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_51(Point(119 + 51, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_52(Point(119 + 52, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_53(Point(119 + 53, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_54(Point(119 + 54, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_55(Point(119 + 55, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_56(Point(119 + 56, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_57(Point(119 + 57, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_58(Point(119 + 58, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_59(Point(119 + 59, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_60(Point(119 + 60, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_61(Point(119 + 61, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_62(Point(119 + 62, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_63(Point(119 + 63, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_64(Point(119 + 64, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_65(Point(119 + 65, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_66(Point(119 + 66, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_67(Point(119 + 67, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_68(Point(119 + 68, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_69(Point(119 + 69, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_70(Point(119 + 70, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_71(Point(119 + 71, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_72(Point(119 + 72, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_73(Point(119 + 73, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_74(Point(119 + 74, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_75(Point(119 + 75, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_76(Point(119 + 76, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_77(Point(119 + 77, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_78(Point(119 + 78, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_79(Point(119 + 79, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_80(Point(119 + 80, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_81(Point(119 + 81, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_82(Point(119 + 82, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_83(Point(119 + 83, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_84(Point(119 + 84, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_85(Point(119 + 85, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_86(Point(119 + 86, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_87(Point(119 + 87, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_88(Point(119 + 88, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_89(Point(119 + 89, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_90(Point(119 + 90, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_91(Point(119 + 91, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_92(Point(119 + 92, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_93(Point(119 + 93, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_94(Point(119 + 94, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_95(Point(119 + 95, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_96(Point(119 + 96, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_97(Point(119 + 97, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_98(Point(119 + 98, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_99(Point(119 + 99, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_100(Point(119 + 100, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_101(Point(119 + 101, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_102(Point(119 + 102, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_103(Point(119 + 103, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_104(Point(119 + 104, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_105(Point(119 + 105, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_106(Point(119 + 106, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_107(Point(119 + 107, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_108(Point(119 + 108, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_109(Point(119 + 109, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_110(Point(119 + 110, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	pro_111(Point(119 + 111, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg")
+
 {
 	attach(Lock_button);
 	attach(Up_button);
@@ -691,6 +840,13 @@ Phone::Phone() :
 	Screen_status = poweroff;
 	Sound_status = 8;
 	lock_count = 0;
+	power_off_try = 1;
+}
+void Phone::cb_blank(Address, Address pw) {
+	reference_to<Phone>(pw).blank();
+}
+void Phone::blank() {
+	return;
 }
 void Phone::unlock()
 {
@@ -698,6 +854,14 @@ void Phone::unlock()
 	attach(Desktop);
 	Screen_status = desktop;
 	Current_Screen_state.put("Desktop");
+	attach(time_display_2);
+	for (;;) {
+		time_display_2.get_time();
+		redraw();
+		wait();
+		show();
+		if (time_refresh) { time_refresh = false; break; }
+	}
 }
 void Phone::detach_unlock(int i)
 {
@@ -739,7 +903,6 @@ void Phone::attach_unlock()
 	attach(pass_9);
 	attach(Password);
 }
-
 Image& Phone::show_sound(int i) {
 	switch (i) {
 	case 0: return Sound_screen_0;
@@ -767,15 +930,326 @@ void Phone::cb_switchon(Address, Address pw)
 }
 void Phone::switchon()
 {
+	if (Screen_status == desktop) {
+		time_refresh_2 = true;
+	}
+	//time_refresh = true;
+	if (power_off_try == 1) {
+		second_count[0] = clock();
+		power_off_check++;
+		power_off_try = -power_off_try;
+	}
+	else {
+		second_count[1] = clock();
+		power_off_check++;
+		power_off_try = -power_off_try;
+	}
+	if (power_off_check == 2) {
+		power_off_check = 0;
+		double t = (double)(second_count[1] - second_count[0]) / CLOCKS_PER_SEC;
+		cout << t << endl;
+		if (t < 1.5) screen_alter();
+		else ask_power_off();
+	}
+}
+void Phone::pro() {
+	attach(pro__0); redraw(); wait(); show(); Sleep(10);
+	attach(pro_0); redraw(); wait(); show(); Sleep(10);
+	attach(pro_1); redraw(); wait(); show(); Sleep(10);
+	attach(pro_2); redraw(); wait(); show(); Sleep(10);
+	attach(pro_3); redraw(); wait(); show(); Sleep(10);
+	attach(pro_4); redraw(); wait(); show(); Sleep(10);
+	attach(pro_5); redraw(); wait(); show(); Sleep(10);
+	attach(pro_6); redraw(); wait(); show(); Sleep(10);
+	attach(pro_7); redraw(); wait(); show(); Sleep(10);
+	attach(pro_8); redraw(); wait(); show(); Sleep(10);
+	attach(pro_9); redraw(); wait(); show(); Sleep(10);
+	attach(pro_10); redraw(); wait(); show(); Sleep(10);
+	attach(pro_11); redraw(); wait(); show(); Sleep(10);
+	attach(pro_12); redraw(); wait(); show(); Sleep(10);
+	attach(pro_13); redraw(); wait(); show(); Sleep(10);
+	attach(pro_14); redraw(); wait(); show(); Sleep(10);
+	attach(pro_15); redraw(); wait(); show(); Sleep(10);
+	attach(pro_16); redraw(); wait(); show(); Sleep(10);
+	attach(pro_17); redraw(); wait(); show(); Sleep(10);
+	attach(pro_18); redraw(); wait(); show(); Sleep(10);
+	attach(pro_19); redraw(); wait(); show(); Sleep(10);
+	attach(pro_20); redraw(); wait(); show(); Sleep(10);
+	attach(pro_21); redraw(); wait(); show(); Sleep(10);
+	attach(pro_22); redraw(); wait(); show(); Sleep(10);
+	attach(pro_23); redraw(); wait(); show(); Sleep(10);
+	attach(pro_24); redraw(); wait(); show(); Sleep(10);
+	attach(pro_25); redraw(); wait(); show(); Sleep(10);
+	attach(pro_26); redraw(); wait(); show(); Sleep(10);
+	attach(pro_27); redraw(); wait(); show(); Sleep(10);
+	attach(pro_28); redraw(); wait(); show(); Sleep(10);
+	attach(pro_29); redraw(); wait(); show(); Sleep(10);
+	attach(pro_30); redraw(); wait(); show(); Sleep(10);
+	attach(pro_31); redraw(); wait(); show(); Sleep(10);
+	attach(pro_32); redraw(); wait(); show(); Sleep(10);
+	attach(pro_33); redraw(); wait(); show(); Sleep(10);
+	attach(pro_34); redraw(); wait(); show(); Sleep(10);
+	attach(pro_35); redraw(); wait(); show(); Sleep(10);
+	attach(pro_36); redraw(); wait(); show(); Sleep(10);
+	attach(pro_37); redraw(); wait(); show(); Sleep(10);
+	attach(pro_38); redraw(); wait(); show(); Sleep(10);
+	attach(pro_39); redraw(); wait(); show(); Sleep(10);
+	attach(pro_40); redraw(); wait(); show(); Sleep(10);
+	attach(pro_41); redraw(); wait(); show(); Sleep(10);
+	attach(pro_42); redraw(); wait(); show(); Sleep(10);
+	attach(pro_43); redraw(); wait(); show(); Sleep(10);
+	attach(pro_44); redraw(); wait(); show(); Sleep(10);
+	attach(pro_45); redraw(); wait(); show(); Sleep(10);
+	attach(pro_46); redraw(); wait(); show(); Sleep(10);
+	attach(pro_47); redraw(); wait(); show(); Sleep(10);
+	attach(pro_48); redraw(); wait(); show(); Sleep(10);
+	attach(pro_49); redraw(); wait(); show(); Sleep(10);
+	attach(pro_50); redraw(); wait(); show(); Sleep(10);
+	attach(pro_51); redraw(); wait(); show(); Sleep(10);
+	attach(pro_52); redraw(); wait(); show(); Sleep(10);
+	attach(pro_53); redraw(); wait(); show(); Sleep(10);
+	attach(pro_54); redraw(); wait(); show(); Sleep(10);
+	attach(pro_55); redraw(); wait(); show(); Sleep(10);
+	attach(pro_56); redraw(); wait(); show(); Sleep(10);
+	attach(pro_57); redraw(); wait(); show(); Sleep(10);
+	attach(pro_58); redraw(); wait(); show(); Sleep(10);
+	attach(pro_59); redraw(); wait(); show(); Sleep(10);
+	attach(pro_60); redraw(); wait(); show(); Sleep(10);
+	attach(pro_61); redraw(); wait(); show(); Sleep(10);
+	attach(pro_62); redraw(); wait(); show(); Sleep(10);
+	attach(pro_63); redraw(); wait(); show(); Sleep(10);
+	attach(pro_64); redraw(); wait(); show(); Sleep(10);
+	attach(pro_65); redraw(); wait(); show(); Sleep(10);
+	attach(pro_66); redraw(); wait(); show(); Sleep(10);
+	attach(pro_67); redraw(); wait(); show(); Sleep(10);
+	attach(pro_68); redraw(); wait(); show(); Sleep(10);
+	attach(pro_69); redraw(); wait(); show(); Sleep(10);
+	attach(pro_70); redraw(); wait(); show(); Sleep(10);
+	attach(pro_71); redraw(); wait(); show(); Sleep(10);
+	attach(pro_72); redraw(); wait(); show(); Sleep(10);
+	attach(pro_73); redraw(); wait(); show(); Sleep(10);
+	attach(pro_74); redraw(); wait(); show(); Sleep(10);
+	attach(pro_75); redraw(); wait(); show(); Sleep(10);
+	attach(pro_76); redraw(); wait(); show(); Sleep(10);
+	attach(pro_77); redraw(); wait(); show(); Sleep(10);
+	attach(pro_78); redraw(); wait(); show(); Sleep(10);
+	attach(pro_79); redraw(); wait(); show(); Sleep(10);
+	attach(pro_80); redraw(); wait(); show(); Sleep(10);
+	attach(pro_81); redraw(); wait(); show(); Sleep(10);
+	attach(pro_82); redraw(); wait(); show(); Sleep(10);
+	attach(pro_83); redraw(); wait(); show(); Sleep(10);
+	attach(pro_84); redraw(); wait(); show(); Sleep(10);
+	attach(pro_85); redraw(); wait(); show(); Sleep(10);
+	attach(pro_86); redraw(); wait(); show(); Sleep(10);
+	attach(pro_87); redraw(); wait(); show(); Sleep(10);
+	attach(pro_88); redraw(); wait(); show(); Sleep(10);
+	attach(pro_89); redraw(); wait(); show(); Sleep(10);
+	attach(pro_90); redraw(); wait(); show(); Sleep(10);
+	attach(pro_91); redraw(); wait(); show(); Sleep(10);
+	attach(pro_92); redraw(); wait(); show(); Sleep(10);
+	attach(pro_93); redraw(); wait(); show(); Sleep(10);
+	attach(pro_94); redraw(); wait(); show(); Sleep(10);
+	attach(pro_95); redraw(); wait(); show(); Sleep(10);
+	attach(pro_96); redraw(); wait(); show(); Sleep(10);
+	attach(pro_97); redraw(); wait(); show(); Sleep(10);
+	attach(pro_98); redraw(); wait(); show(); Sleep(10);
+	attach(pro_99); redraw(); wait(); show(); Sleep(10);
+	attach(pro_100); redraw(); wait(); show(); Sleep(10);
+	attach(pro_101); redraw(); wait(); show(); Sleep(10);
+	attach(pro_102); redraw(); wait(); show(); Sleep(10);
+	attach(pro_103); redraw(); wait(); show(); Sleep(10);
+	attach(pro_104); redraw(); wait(); show(); Sleep(10);
+	attach(pro_105); redraw(); wait(); show(); Sleep(10);
+	attach(pro_106); redraw(); wait(); show(); Sleep(10);
+	attach(pro_107); redraw(); wait(); show(); Sleep(10);
+	attach(pro_108); redraw(); wait(); show(); Sleep(10);
+	attach(pro_109); redraw(); wait(); show(); Sleep(10);
+	attach(pro_110); redraw(); wait(); show(); Sleep(10);
+	attach(pro_111); redraw(); wait(); show(); Sleep(10);
+
+}
+void Phone::depro() {
+	detach(pro__0);
+	detach(pro_0);
+	detach(pro_1);
+	detach(pro_2);
+	detach(pro_3);
+	detach(pro_4);
+	detach(pro_5);
+	detach(pro_6);
+	detach(pro_7);
+	detach(pro_8);
+	detach(pro_9);
+	detach(pro_10);
+	detach(pro_11);
+	detach(pro_12);
+	detach(pro_13);
+	detach(pro_14);
+	detach(pro_15);
+	detach(pro_16);
+	detach(pro_17);
+	detach(pro_18);
+	detach(pro_19);
+	detach(pro_20);
+	detach(pro_21);
+	detach(pro_22);
+	detach(pro_23);
+	detach(pro_24);
+	detach(pro_25);
+	detach(pro_26);
+	detach(pro_27);
+	detach(pro_28);
+	detach(pro_29);
+	detach(pro_30);
+	detach(pro_31);
+	detach(pro_32);
+	detach(pro_33);
+	detach(pro_34);
+	detach(pro_35);
+	detach(pro_36);
+	detach(pro_37);
+	detach(pro_38);
+	detach(pro_39);
+	detach(pro_40);
+	detach(pro_41);
+	detach(pro_42);
+	detach(pro_43);
+	detach(pro_44);
+	detach(pro_45);
+	detach(pro_46);
+	detach(pro_47);
+	detach(pro_48);
+	detach(pro_49);
+	detach(pro_50);
+	detach(pro_51);
+	detach(pro_52);
+	detach(pro_53);
+	detach(pro_54);
+	detach(pro_55);
+	detach(pro_56);
+	detach(pro_57);
+	detach(pro_58);
+	detach(pro_59);
+	detach(pro_60);
+	detach(pro_61);
+	detach(pro_62);
+	detach(pro_63);
+	detach(pro_64);
+	detach(pro_65);
+	detach(pro_66);
+	detach(pro_67);
+	detach(pro_68);
+	detach(pro_69);
+	detach(pro_70);
+	detach(pro_71);
+	detach(pro_72);
+	detach(pro_73);
+	detach(pro_74);
+	detach(pro_75);
+	detach(pro_76);
+	detach(pro_77);
+	detach(pro_78);
+	detach(pro_79);
+	detach(pro_80);
+	detach(pro_81);
+	detach(pro_82);
+	detach(pro_83);
+	detach(pro_84);
+	detach(pro_85);
+	detach(pro_86);
+	detach(pro_87);
+	detach(pro_88);
+	detach(pro_89);
+	detach(pro_90);
+	detach(pro_91);
+	detach(pro_92);
+	detach(pro_93);
+	detach(pro_94);
+	detach(pro_95);
+	detach(pro_96);
+	detach(pro_97);
+	detach(pro_98);
+	detach(pro_99);
+	detach(pro_100);
+	detach(pro_101);
+	detach(pro_102);
+	detach(pro_103);
+	detach(pro_104);
+	detach(pro_105);
+	detach(pro_106);
+	detach(pro_107);
+	detach(pro_108);
+	detach(pro_109);
+	detach(pro_110);
+	detach(pro_111);
+
+}
+void Phone::ask_power_off() {
 	switch (Screen_status) {
-		
-	case poweroff: Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
-				   Sleep(2000); Screen_status = locked; detach(Starting_screen); attach(Lock_screen);  Current_Screen_state.put("locked open"); redraw();
-				   break;
-	case locked: Screen_status = closed; detach(Lock_screen); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
-	case closed: Screen_status = locked; detach(Closed_screen); attach(Lock_screen); Current_Screen_state.put("locked open"); redraw(); break;
-	case passwording: Screen_status = closed; detach_unlock(lock_count); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
-	case desktop: Screen_status = closed; detach(Desktop); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+	case poweroff:
+		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
+		Sleep(200);
+		detach(Starting_screen); attach(Starting_p0); redraw(); wait(); show();
+		Sleep(450);
+		pro();
+		attach(Starting_p3); redraw(); wait(); show();
+		Sleep(100);
+		/*
+		detach(Starting_p0); attach(Starting_p1); redraw(); wait(); show();
+		Sleep(450);
+		detach(Starting_p1); attach(Starting_p2); redraw(); wait(); show();
+		Sleep(450);
+		detach(Starting_p2); attach(Starting_p3); redraw(); wait(); show();
+		Sleep(450);
+		*/
+		Screen_status = locked; detach(Starting_p3); depro(); attach(Lock_screen); attach(time_display);
+		Current_Screen_state.put("locked open"); redraw();
+		redraw(); wait(); show();
+		for (;;) {
+			time_display.get_time();
+			redraw();
+			wait();
+			show();
+			if (time_refresh) { time_refresh = false; break; }
+		}
+		break;
+	case locked:
+		Screen_status = poweroff; detach(Lock_screen); detach(time_display); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+	case closed:
+		Screen_status = poweroff; Current_Screen_state.put("poweroff"); redraw(); break;
+	case passwording:
+		Screen_status = poweroff; detach_unlock(lock_count); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+	case desktop:
+		Screen_status = poweroff; detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+	}
+}
+void Phone::screen_alter()
+{
+	switch (Screen_status) {
+		/*
+	case poweroff:
+		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
+		Sleep(2000); Screen_status = locked; detach(Starting_screen); attach(Lock_screen);
+		Current_Screen_state.put("locked open"); redraw();
+		break;
+		*/
+	case locked:
+		Screen_status = closed; detach(Lock_screen); detach(time_display); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+	case closed:
+		Screen_status = locked; detach(Closed_screen); attach(Lock_screen); attach(time_display); 
+		Current_Screen_state.put("locked open"); redraw();
+		for (;;) {
+			time_display.get_time();
+			redraw();
+			wait();
+			show();
+			if (time_refresh) { time_refresh = false; break; }
+		}
+		break;
+	case passwording:
+		Screen_status = closed; detach_unlock(lock_count); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+	case desktop:
+		Screen_status = closed; detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	}
 }
 void Phone::cb_home(Address, Address pw)
@@ -784,9 +1258,12 @@ void Phone::cb_home(Address, Address pw)
 }
 void Phone::home()
 {
+	time_refresh = true;
 	switch (Screen_status) {
-	case closed: Screen_status = passwording; detach(Closed_screen); attach_unlock(); Current_Screen_state.put("passwording..."); redraw(); break;
-	case locked: Screen_status = passwording; detach(Lock_screen); attach_unlock(); Current_Screen_state.put("passwording..."); redraw(); break;
+	case closed: Screen_status = passwording; detach(Closed_screen); attach_unlock(); 
+		Current_Screen_state.put("passwording..."); redraw(); break;
+	case locked: Screen_status = passwording; detach(Lock_screen); detach(time_display); attach_unlock();
+		Current_Screen_state.put("passwording..."); redraw(); break;
 	}
 }
 void Phone::cb_mute(Address, Address pw)
@@ -874,7 +1351,9 @@ void Phone::pass0()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -916,7 +1395,9 @@ void Phone::pass1()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -958,7 +1439,9 @@ void Phone::pass2()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1000,7 +1483,9 @@ void Phone::pass3()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1042,7 +1527,9 @@ void Phone::pass4()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1084,7 +1571,9 @@ void Phone::pass5()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1126,7 +1615,9 @@ void Phone::pass6()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1168,7 +1659,9 @@ void Phone::pass7()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1210,7 +1703,9 @@ void Phone::pass8()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1252,7 +1747,9 @@ void Phone::pass9()
 			redraw();
 			wait();
 			show();
+			detach_passbutton();
 			Sleep(1000);
+			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);
 			detach(pass_title4);
@@ -1282,7 +1779,15 @@ void Phone::pass_delete()
 		detach_unlock(0);
 		Screen_status = locked;
 		attach(Lock_screen);
-		Current_Screen_state.put("locked open"); 
+		attach(time_display);
+		Current_Screen_state.put("locked open");
+		for (;;) {
+			time_display.get_time();
+			redraw();
+			wait();
+			show();
+			if (time_refresh) { time_refresh = false; break; }
+		}
 		redraw();
 	}
 }

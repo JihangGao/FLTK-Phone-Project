@@ -739,6 +739,68 @@ void Airplane::draw_lines() const
 		fl_line(point(2).x, point(2).y, point(4).x, point(4).y);
 	}
 }
+
+Time_Display::Time_Display(Point(xy))
+{
+	get_time();
+	add(xy);
+}
+
+void Time_Display::get_time()
+{
+	time_t t = time(0);
+	struct tm *p;
+	p = localtime(&t);
+	currh = p->tm_hour;
+	currm = p->tm_min;
+	currs = p->tm_sec;
+	stringstream ss;
+
+	if (currh >= 10) ss << currh;
+	else ss << "0" << currh;
+	if (currm >= 10) ss << ":" << currm;
+	else ss << ":0" << currm;
+	time_now = ss.str();
+}
+
+void Time_Display::draw_lines() const
+{
+	if (color().visibility()) {
+		fl_font(Font::helvetica, 55);
+		fl_draw(time_now.c_str(), point(0).x, point(0).y);
+	}
+}
+
+Time_Display_2::Time_Display_2(Point(xy))
+{
+	get_time();
+	add(xy);
+}
+
+void Time_Display_2::get_time()
+{
+	time_t t = time(0);
+	struct tm *p;
+	p = localtime(&t);
+	currh = p->tm_hour;
+	currm = p->tm_min;
+	currs = p->tm_sec;
+	stringstream ss;
+
+	if (currh >= 10) ss << currh;
+	else ss << "0" << currh;
+	if (currm >= 10) ss << ":" << currm;
+	else ss << ":0" << currm;
+	time_now = ss.str();
+}
+
+void Time_Display_2::draw_lines() const
+{
+	if (color().visibility()) {
+		fl_font(Font::helvetica, 15);
+		fl_draw(time_now.c_str(), point(0).x, point(0).y);
+	}
+}
 //------------------------------------------------------------------------------
 
 } // of namespace Graph_lib

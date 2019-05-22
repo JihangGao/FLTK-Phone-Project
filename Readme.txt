@@ -8,4 +8,6 @@ password finished (bug: entering during the delay of wrong password/still unable
 decoration finished
 time and weather function finished
 dynamic progress bar finished
-app operating...
+contact drag/upbutton/downbutton finished
+contact_detail_page operating...
+basic function required done 90%

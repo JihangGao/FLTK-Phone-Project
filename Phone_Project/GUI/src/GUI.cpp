@@ -32,7 +32,7 @@
 namespace Graph_lib {
 
 //------------------------------------------------------------------------------
-
+	drag_delta contact_delta{ 0,0,0,0,0 };
 void Button::attach(Window& win)
 {
 	pw = new Fl_Button(loc.x, loc.y, width, height, label.c_str());
@@ -43,6 +43,13 @@ void Button::attach(Window& win)
 void appButton::attach(Window& win)
 {
 	pw = new MyApp(loc.x, loc.y, width, height, label.c_str());
+	pw->callback(reinterpret_cast<Fl_Callback*>(do_it), &win); // pass the window
+	own = &win;
+}
+
+void contact_bar::attach(Window& win)
+{
+	pw = new contactbar(loc.x, loc.y, width, height, label.c_str());
 	pw->callback(reinterpret_cast<Fl_Callback*>(do_it), &win); // pass the window
 	own = &win;
 }
@@ -639,6 +646,41 @@ void power::draw() {
 	else draw_label();
 	if (Fl::focus() == this) draw_focus();
 }
+void contactbar::draw() {
+	if (type() == FL_HIDDEN_BUTTON) return;
+	Fl_Color col = value() ? selection_color() : color();
+	draw_box(value() ? (down_box() ? down_box() : fl_down(box())) : box(), col);
+	draw_backdrop();
+	if (labeltype() == FL_NORMAL_LABEL && value()) {
+		Fl_Color c = labelcolor();
+		labelcolor(fl_contrast(c, col));
+		draw_label();
+		labelcolor(c);
+	}
+	else draw_label();
+	if (Fl::focus() == this) draw_focus();
+}
+int contactbar::handle(int e) {
+	switch (e) {
+	case FL_PUSH:
+		contact_delta.prev_x = Fl::event_x();
+		contact_delta.prev_y = Fl::event_y();
+	case FL_DRAG:
+		contact_delta.count++;
+		if (contact_delta.count > 10) {
+			contact_delta.count = 0;
+			contact_delta.delta_x = Fl::event_x();
+			contact_delta.delta_y = Fl::event_y();
+			do_callback();
+			contact_delta.prev_x = Fl::event_x();
+			contact_delta.prev_y = Fl::event_y();
+		}
+		return 1;
+	default: return 0;
+	}
+	return (Fl_Button::handle(e));
+}
+;
 //------------------------------------------------------------------------------
 Phone::Phone() :
 	Window(Point(0, 0), 1024, 800, "Phone"),
@@ -702,8 +744,8 @@ Phone::Phone() :
 	pass_title0(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title0.jpg"),
 	pass_titlewrong(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_titlewrong.jpg"),
 	Desktop(Point(27, 75), "D:\\C++\\Phone_Project\\images\\desktop.jpg"),
-	//home_button(Point(139, 578), 50, 50, "home", cb_home),
-	home_button(Point(500, 200), 50, 50, "home", cb_home),
+	home_button(Point(139, 578), 50, 50, "home", cb_home),
+	//home_button(Point(500, 200), 50, 50, "home", cb_home),
 	password_state(Point(400, 0), 100, 40, "password"),
 	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete),
 	time_display(Point(101, 195)),
@@ -820,9 +862,28 @@ Phone::Phone() :
 	pro_108(Point(119 + 108, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
 	pro_109(Point(119 + 109, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
 	pro_110(Point(119 + 110, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_111(Point(119 + 111, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg")
-
+	pro_111(Point(119 + 111, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
+	Contact(Point(27, 75), "D:\\C++\\Phone_Project\\images\\contact.jpg"),
+	call_contact(Point(54, 512), 46, 46, "", cb_contact),
+	name_0(Point(114, 280), "Bruno Bucciarati"),
+	name_1(Point(114, 328), "Dio Brando"),
+	name_2(Point(114, 376), "Guido Mista"),
+	name_3(Point(114, 376 + 48), "Higashikata Josuke"),
+	name_4(Point(114, 376 + 2 * 48), "King Crimson"),
+	name_5(Point(114, 376 + 3 * 48), "Kujo Jotaro"),
+	name_6(Point(114, 376 + 4 * 48), "Risotto Nero"),
+	name_7(Point(114, 376 + 5 * 48), "Trish Una"),
+	name_8(Point(114, 376 + 6 * 48), "Zeppeli Caesar"),
+	name_9(Point(114, 376 + 7 * 48), "Zoootopia"),
+	pg_up(Point(500, 200), 50, 50, "UP", cb_up),
+	pg_dw(Point(700, 200), 50, 50, "DW", cb_dw),
+	draging(Point(900, 200), 50, 50, "drag", cb_drag)
 {
+	for (int i = 0; i <= 9; i++) {
+		name(i).set_color(Color::black);
+		name(i).set_font(Font::helvetica);
+		name(i).set_font_size(12);
+	}
 	attach(Lock_button);
 	attach(Up_button);
 	attach(Down_button);
@@ -842,25 +903,103 @@ Phone::Phone() :
 	lock_count = 0;
 	power_off_try = 1;
 }
+void Phone::cb_drag(Address, Address pw) {
+	reference_to<Phone>(pw).drag();
+}
+void Phone::drag(){
+	int alter = contact_delta.delta_y - contact_delta.prev_y;
+	cout << alter << endl;
+	if (alter > 10) {
+		up();
+	}
+	else if (alter < -10) {
+		dw();
+	}
+
+
+}
+void Phone::cb_up(Address, Address pw) {
+	reference_to<Phone>(pw).up();
+}
+void Phone::up() {
+	if (name(9).point(0).y <= 280) return;
+	for (int i = 0; i <= 9; i++) {
+		name(i).move(0, -48);
+	}
+	for (int i = 0; i <= 9; i++) {
+		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
+		else detach(name(i));
+	}
+	redraw();
+}
+void Phone::cb_dw(Address, Address pw) {
+	reference_to<Phone>(pw).dw();
+}
+void Phone::dw() {
+	if (name(0).point(0).y >= 280) return;
+	for (int i = 0; i <= 9; i++) {
+		name(i).move(0, 48);
+	}
+	for (int i = 0; i <= 9; i++) {
+		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
+		else detach(name(i));
+	}
+	redraw();
+}
 void Phone::cb_blank(Address, Address pw) {
 	reference_to<Phone>(pw).blank();
 }
 void Phone::blank() {
 	return;
 }
+void Phone::cb_contact(Address, Address pw) {
+	reference_to<Phone>(pw).contact();
+}
+void Phone::contact() {
+	app_open = true;
+	attach(draging);
+	attach(pg_up);
+	attach(pg_dw);
+	Screen_status = inapp;
+	Current_Screen_state.put("Viewing...");
+	attach(Contact);
+	for (int i = 0; i < 6; i++) {
+		attach(name(i));
+	}
+	detach(Desktop);
+	detach(call_contact);
+	time_refresh_2 = true;
+	detach(time_display_2);
+	redraw();
+	/*--------function and buttons waiting*/
+}
 void Phone::unlock()
 {
 	detach_unlock(4);
-	attach(Desktop);
-	Screen_status = desktop;
-	Current_Screen_state.put("Desktop");
-	attach(time_display_2);
-	for (;;) {
-		time_display_2.get_time();
+	if (app_open) {
+		attach(pg_up);
+		attach(pg_dw);
+		attach(Contact);
+		Screen_status = inapp;
+		Current_Screen_state.put("Viewing...");
+		for (int i = 0; i < 6; i++) {
+			attach(name(i));
+		}
 		redraw();
-		wait();
-		show();
-		if (time_refresh) { time_refresh = false; break; }
+	}
+	else {
+		attach(call_contact);
+		attach(Desktop);
+		Screen_status = desktop;
+		Current_Screen_state.put("Desktop");
+		attach(time_display_2);
+		for (;;) {
+			time_display_2.get_time();
+			redraw();
+			wait();
+			show();
+			if (time_refresh_2) { time_refresh_2 = false; break; }
+		}
 	}
 }
 void Phone::detach_unlock(int i)
@@ -1187,7 +1326,7 @@ void Phone::depro() {
 void Phone::ask_power_off() {
 	switch (Screen_status) {
 	case poweroff:
-		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show();
+		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show(); time_refresh = false;
 		Sleep(200);
 		detach(Starting_screen); attach(Starting_p0); redraw(); wait(); show();
 		Sleep(450);
@@ -1220,7 +1359,13 @@ void Phone::ask_power_off() {
 	case passwording:
 		Screen_status = poweroff; detach_unlock(lock_count); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
 	case desktop:
-		Screen_status = poweroff; detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+		Screen_status = poweroff; detach(call_contact); detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+	case inapp:
+		Screen_status = poweroff; detach(pg_up); detach(pg_dw);
+		for (int i = 0; i <= 9; i++) {
+			detach(name(i));
+		}
+		detach(Contact); app_open = false; attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
 	}
 }
 void Phone::screen_alter()
@@ -1236,7 +1381,7 @@ void Phone::screen_alter()
 	case locked:
 		Screen_status = closed; detach(Lock_screen); detach(time_display); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	case closed:
-		Screen_status = locked; detach(Closed_screen); attach(Lock_screen); attach(time_display); 
+		Screen_status = locked; detach(Closed_screen); attach(Lock_screen); attach(time_display); time_refresh = false;
 		Current_Screen_state.put("locked open"); redraw();
 		for (;;) {
 			time_display.get_time();
@@ -1249,7 +1394,13 @@ void Phone::screen_alter()
 	case passwording:
 		Screen_status = closed; detach_unlock(lock_count); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	case desktop:
-		Screen_status = closed; detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+		Screen_status = closed; detach(call_contact); detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+	case inapp:
+		Screen_status = closed; detach(pg_up); detach(pg_dw);
+		for (int i = 0; i <= 9; i++) {
+			detach(name(i));
+		}
+		detach(Contact); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	}
 }
 void Phone::cb_home(Address, Address pw)
@@ -1264,6 +1415,20 @@ void Phone::home()
 		Current_Screen_state.put("passwording..."); redraw(); break;
 	case locked: Screen_status = passwording; detach(Lock_screen); detach(time_display); attach_unlock();
 		Current_Screen_state.put("passwording..."); redraw(); break;
+	case inapp: Screen_status = desktop; detach(pg_up); detach(pg_dw);
+		for (int i = 0; i <= 9; i++) {
+			detach(name(i));
+		}
+		detach(Contact); attach(Desktop); attach(call_contact); attach(time_display_2); app_open = false; time_refresh_2 = false;
+		Current_Screen_state.put("Desktop"); redraw(); 
+		for (;;) {
+			time_display_2.get_time();
+			redraw();
+			wait();
+			show();
+			if (time_refresh_2) { time_refresh_2 = false; break; }
+		}
+		break;
 	}
 }
 void Phone::cb_mute(Address, Address pw)
@@ -1352,7 +1517,9 @@ void Phone::pass0()
 			wait();
 			show();
 			detach_passbutton();
+			redraw();
 			Sleep(1000);
+			redraw();
 			attach_passbutton();
 			detach(pass_titlewrong);
 			attach(pass_title0);

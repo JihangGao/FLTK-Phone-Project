@@ -17,8 +17,14 @@ cancel 193x452 42x18
 
 title 276x60 weizhi:y+60
 time 66x66
-
+通讯录 27x437 46x46
 
 
 进度条 92x288
 112x3
+
+
+contact 1 27 240
+	delta = 29
+	height = 19	
+	

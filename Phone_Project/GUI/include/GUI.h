@@ -14,7 +14,13 @@
 #include <iostream>
 #include <ctime>
 namespace Graph_lib {
-
+	struct drag_delta {
+		int prev_x;
+		int prev_y;
+		int delta_x;
+		int delta_y;
+		int count;
+	};
 //------------------------------------------------------------------------------
 
     typedef void* Address;    // Address is a synonym for void*
@@ -71,6 +77,14 @@ namespace Graph_lib {
 
 	struct appButton : Widget {
 		appButton(Point xy, int w, int h, const string& label, Callback cb)
+			: Widget(xy, w, h, label, cb)
+		{}
+
+		void attach(Window&);
+	};
+
+	struct contact_bar :Widget {
+		contact_bar(Point xy, int w, int h, const string& label, Callback cb)
 			: Widget(xy, w, h, label, cb)
 		{}
 
@@ -294,6 +308,15 @@ namespace Graph_lib {
 		};
 	};
 
+	class contactbar : public Fl_Button
+	{
+	public:
+		void draw();
+		contactbar(int x, int y, int w, int h, const char* l = 0)
+			:Fl_Button(x, y, w, h, l) 
+		{}
+		int handle(int);
+	};
 	class power : public Fl_Button
 	{
 
@@ -394,10 +417,16 @@ namespace Graph_lib {
 		Button passdelete;
 		Button Up_button;
 		Button Down_button;
-		//Button home_button;
 		powerButton Lock_button;
 		Button Mute_button;
 		Button home_button;
+		Button call_contact;
+		contact_bar draging;
+		void drag();
+		static void cb_drag(Address, Address);
+		void contact();
+		static void cb_contact(Address, Address);
+		Image Contact;
 		Image Password;
 		Image p0;
 		Image p1;
@@ -409,6 +438,36 @@ namespace Graph_lib {
 		Image p7;
 		Image p8;
 		Image p9;
+		Button pg_up;
+		void up();
+		static void cb_up(Address, Address);
+		void dw();
+		static void cb_dw(Address, Address);
+		Button pg_dw;
+		Text name_1;
+		Text name_2;
+		Text name_3;
+		Text name_4;
+		Text name_5;
+		Text name_6;
+		Text name_7;
+		Text name_8;
+		Text name_9;
+		Text name_0;
+		Text& name(int i) { 
+			switch(i) {
+			case 0: return name_0;
+			case 1: return name_1;
+			case 2: return name_2;
+			case 3: return name_3;
+			case 4: return name_4;
+			case 5: return name_5;
+			case 6: return name_6;
+			case 7: return name_7;
+			case 8: return name_8;
+			case 9: return name_9;
+			}
+		};
 		Image Phone_fraction;
 		Image Lock_screen;
 		Image Closed_screen;
@@ -659,6 +718,7 @@ namespace Graph_lib {
 		void ask_power_off();
 		bool time_refresh = false;
 		bool time_refresh_2 = false;
+		bool app_open = false;
 	};
 
 //------------------------------------------------------------------------------

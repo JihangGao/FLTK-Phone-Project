@@ -760,8 +760,8 @@ void Time_Display::get_time()
 	else ss << "0" << currh;
 	if (currm >= 10) ss << ":" << currm;
 	else ss << ":0" << currm;
-	if (currs >= 10) ss << ":" << currs;
-	else ss << ":0" << currs;
+	//if (currs >= 10) ss << ":" << currs;
+	//else ss << ":0" << currs;
 	time_now = ss.str();
 }
 
@@ -793,8 +793,8 @@ void Time_Display_2::get_time()
 	else ss << "0" << currh;
 	if (currm >= 10) ss << ":" << currm;
 	else ss << ":0" << currm;
-	if (currs >= 10) ss << ":" << currs;
-	else ss << ":0" << currs;
+	//if (currs >= 10) ss << ":" << currs;
+	//else ss << ":0" << currs;
 	time_now = ss.str();
 }
 

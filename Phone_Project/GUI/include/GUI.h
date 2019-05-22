@@ -242,64 +242,7 @@ namespace Graph_lib {
 				case FL_RELEASE:
 					cout << endl << "Button A callback!" << endl;
 					break;
-				case FL_ENTER:
-					color(FL_CYAN);
-					cout << "enter" << " event and returns:" << endl;
-					redraw();
-					break;
-
-				case FL_LEAVE:
-					color(FL_BACKGROUND_COLOR);
-					cout << "leave" << " event and returns:"  << endl;
-					redraw();
-					break;
-
-				case FL_DRAG:
-					cout << "drag" << " event and returns:" << endl;
-					break;
-
-				case FL_FOCUS:
-					cout << "focus" << " event and returns:"  << endl;
-					break;
-
-				case FL_UNFOCUS:
-					cout << "unfocus" << " event and returns:" << endl;
-					break;
-
-
 				
-
-				case FL_DEACTIVATE:
-					cout << "deactivate" << " event and returns:"  << endl;
-					break;
-
-				case FL_ACTIVATE:
-					cout << "activate" << " event and returns:" << endl;
-					break;
-
-				case FL_HIDE:
-					cout << "hide" << " event and returns:"  << endl;
-					break;
-
-				case FL_SHOW:
-					cout << "show" << " event and returns:"  << endl;
-					break;
-
-				case FL_PASTE:
-					cout << "paste" << " event and returns:"  << endl;
-					break;
-
-				case  FL_SELECTIONCLEAR:
-					cout << "selectionclear" << " event and returns:"  << endl;
-					break;
-
-				case  FL_MOUSEWHEEL:
-					cout << "mousewheel" << " event and returns:"  << endl;
-					break;
-
-				case  FL_NO_EVENT:
-					cout << "no event" << " and returns:"  << endl;
-					break;
 				default: return 0;
 			}
 			
@@ -328,11 +271,11 @@ namespace Graph_lib {
 		int handle(int e) {
 			switch (e) {
 			case FL_PUSH:
-				cout << endl << "Button C callback!" << endl;
+				cout << endl << "power button release!" << endl;
 				do_callback();
 				break;
 			case FL_RELEASE:
-				cout << endl << "Button A callback!" << endl;
+				cout << endl << "power button release!" << endl;
 				break;
 			default: return 0;
 			}
@@ -422,9 +365,89 @@ namespace Graph_lib {
 		Button home_button;
 		Button call_contact;
 		contact_bar draging;
+		In_box search_name;
+		Button do_search;
+		void dosearch();
+		static void cb_dosearch(Address, Address);
+		void undosearch();
+		static void cb_undosearch(Address, Address);
+		Button undo_search;
+		Image contact_detail;
+		Text name_show;
+		Button return_contact;
+		int find_name_detail(int e) {
+			for (int i = 0; i <= 9; i++) {
+				if (name(i).point(0).y == 280 + e * 48) return i;
+			}
+			return -1;
+		}
+		void re_contact();
+		static void cb_re_contact(Address, Address);
+		Button detail_0;
+		Button detail_1;
+		Button detail_2;
+		Button detail_3;
+		Button detail_4;
+		Button detail_5;
+		Button& cont(int h) {
+			switch (h) { 
+			case 0: return detail_0;
+			case 1: return detail_1;
+			case 2: return detail_2;
+			case 3: return detail_3;
+			case 4: return detail_4;
+			case 5: return detail_5;
+			}
+		}
+		void detach_contact() {
+			for (int i = 0; i <= 5; i++) {
+				detach(cont(i));
+			}
+			for (int i = 0; i <= 9; i++) {
+				detach(name(i));
+			}
+			detach(pg_dw);
+			detach(pg_up);
+			detach(draging);
+			detach(search_name);
+			detach(Contact);
+			detach(do_search);
+			detach(undo_search);
+		}
+		void attach_contact() {
+			contact_ini();
+			for (int i = 0; i <= 5; i++) {
+				attach(cont(i));
+			}
+			attach(do_search);
+			attach(undo_search);
+			attach(draging);
+			attach(pg_up);
+			attach(pg_dw);
+			attach(Contact);
+			Current_Screen_state.put("Viewing...");
+			attach(search_name);
+			for (int i = 0; i <= 9; i++) {
+				detach(name(i));
+				if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
+			}
+		}
+		void call_detail(int);
+		static void cb_call_detail_0(Address, Address);
+		static void cb_call_detail_1(Address, Address);
+		static void cb_call_detail_2(Address, Address);
+		static void cb_call_detail_3(Address, Address);
+		static void cb_call_detail_4(Address, Address);
+		static void cb_call_detail_5(Address, Address);
+		void searching(string);
 		void drag();
 		static void cb_drag(Address, Address);
 		void contact();
+		void contact_ini() {
+			for (int i = 0; i <= 9; i++) {
+				name(i).set(114, 280 + 48 * i);
+			}
+		};
 		static void cb_contact(Address, Address);
 		Image Contact;
 		Image Password;
@@ -719,6 +742,9 @@ namespace Graph_lib {
 		bool time_refresh = false;
 		bool time_refresh_2 = false;
 		bool app_open = false;
+		const int delta_1 = -48;
+		const int delta_2 = -96;
+		const int delta_3 = -48 * 3;
 	};
 
 //------------------------------------------------------------------------------

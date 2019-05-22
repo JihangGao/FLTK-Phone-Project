@@ -683,10 +683,10 @@ int contactbar::handle(int e) {
 ;
 //------------------------------------------------------------------------------
 Phone::Phone() :
-	Window(Point(0, 0), 1024, 800, "Phone"),
+	Window(Point(0, 0), 600, 960, "Phone"),
 	Phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
 	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home)
-	Lock_button(Point(321, 120), 6, 45, "", cb_switchon),
+	Lock_button(Point(318, 120), 9, 45, "", cb_switchon),
 	Lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
 	Closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg"),
 	Starting_p0(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p0.jpg"),
@@ -697,8 +697,8 @@ Phone::Phone() :
 	Up_button(Point(4, 121), 10, 41, "", cb_soundup),
 	Down_button(Point(4, 174), 10, 41, "", cb_sounddn),
 	Mute_button(Point(5, 74), 8, 32, "", cb_mute),
-	Current_Screen_state(Point(500, 500), 100, 40, "Current Screen State:"),
-	Current_Sound_state(Point(500, 400), 100, 40, "Current Sound State:"),
+	Current_Screen_state(Point(200, 700), 100, 40, "Current Screen State:"),
+	Current_Sound_state(Point(200, 800), 100, 40, "Current Sound State:"),
 	Sound_screen_0(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s0.jpg"),
 	Sound_screen_1(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s1.jpg"),
 	Sound_screen_2(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s2.jpg"),
@@ -746,7 +746,7 @@ Phone::Phone() :
 	Desktop(Point(27, 75), "D:\\C++\\Phone_Project\\images\\desktop.jpg"),
 	home_button(Point(139, 578), 50, 50, "home", cb_home),
 	//home_button(Point(500, 200), 50, 50, "home", cb_home),
-	password_state(Point(400, 0), 100, 40, "password"),
+	password_state(Point(200, 900), 100, 40, "password"),
 	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete),
 	time_display(Point(101, 195)),
 	time_display_2(Point(150, 90)),
@@ -875,15 +875,30 @@ Phone::Phone() :
 	name_7(Point(114, 376 + 5 * 48), "Trish Una"),
 	name_8(Point(114, 376 + 6 * 48), "Zeppeli Caesar"),
 	name_9(Point(114, 376 + 7 * 48), "Zoootopia"),
-	pg_up(Point(500, 200), 50, 50, "UP", cb_up),
-	pg_dw(Point(700, 200), 50, 50, "DW", cb_dw),
-	draging(Point(900, 200), 50, 50, "drag", cb_drag)
+	pg_up(Point(186+27, 125+75), 42, 32, "", cb_up),//down
+	pg_dw(Point(132+27, 125+75), 42, 32, "", cb_dw),//up
+	draging(Point(27, 165+75), 250, 294, "drag", cb_drag),
+	search_name(Point(400, 200), 70, 20, "search:"),
+	contact_detail(Point(27, 75), "D:\\C++\\Phone_Project\\images\\contact_detail.jpg"),
+	name_show(Point(125, 205), ""),
+	return_contact(Point(31, 97), 70, 20, "", cb_re_contact),
+	detail_0(Point(279, 265), 17, 17, "", cb_call_detail_0),
+	detail_1(Point(279, 265 + 48), 17, 17, "", cb_call_detail_1),
+	detail_2(Point(279, 265 + 2 * 48), 17, 17, "", cb_call_detail_2),
+	detail_3(Point(279, 265 + 3 * 48), 17, 17, "", cb_call_detail_3),
+	detail_4(Point(279, 265 + 4 * 48), 17, 17, "", cb_call_detail_4),
+	detail_5(Point(279, 265 + 5 * 48), 17, 17, "", cb_call_detail_5),
+	do_search(Point(400, 300), 50, 50, "Search!", cb_dosearch),
+	undo_search(Point(470, 300), 50, 50, "clear!", cb_undosearch)
 {
 	for (int i = 0; i <= 9; i++) {
 		name(i).set_color(Color::black);
 		name(i).set_font(Font::helvetica);
 		name(i).set_font_size(12);
 	}
+	name_show.set_color(Color::black);
+	name_show.set_font(Font::helvetica);
+	name_show.set_font_size(15);
 	attach(Lock_button);
 	attach(Up_button);
 	attach(Down_button);
@@ -902,18 +917,100 @@ Phone::Phone() :
 	Sound_status = 8;
 	lock_count = 0;
 	power_off_try = 1;
+};
+void Phone::cb_dosearch(Address, Address pw) {
+	reference_to<Phone>(pw).dosearch();
+}
+void Phone::dosearch() {
+	string t = search_name.get_string();
+	detach(pg_up);
+	detach(pg_dw);
+	detach(draging);
+	searching(t);
+}
+void Phone::cb_undosearch(Address, Address pw) {
+	reference_to<Phone>(pw).undosearch();
+}
+void Phone::undosearch() {
+	contact_ini();
+	attach(pg_up);
+	attach(pg_dw);
+	attach(draging);
+	for (int i = 0; i <= 9; i++) {
+		detach(name(i));
+		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
+	}
+	redraw();
+}
+void Phone::cb_re_contact(Address, Address pw) {
+	reference_to<Phone>(pw).re_contact();
+}
+void Phone::re_contact(){
+	detach(return_contact);
+	detach(contact_detail);
+	detach(name_show);
+	for (int i = 0; i <= 5; i++) {
+		attach(cont(i));
+	}
+	attach(do_search);
+	attach(undo_search);
+	attach(draging);
+	attach(pg_up);
+	attach(pg_dw);
+	attach(Contact);
+	Current_Screen_state.put("Viewing...");
+	attach(search_name);
+	for (int i = 0; i <= 9; i++) {
+		detach(name(i));
+		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
+	}
+	redraw();
+}
+void Phone::call_detail(int num) {
+	int t = find_name_detail(num);
+	if (t == -1) return;
+	detach_contact();
+	attach(return_contact);
+	attach(contact_detail);
+	name_show.set_label(name(t).label());
+	attach(name_show);
+	redraw();
+}
+void Phone::cb_call_detail_0(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(0);
+}
+void Phone::cb_call_detail_1(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(1);
+}
+void Phone::cb_call_detail_2(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(2);
+}
+void Phone::cb_call_detail_3(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(3);
+}
+void Phone::cb_call_detail_4(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(4);
+}
+void Phone::cb_call_detail_5(Address, Address pw)
+{
+	reference_to<Phone>(pw).call_detail(5);
 }
 void Phone::cb_drag(Address, Address pw) {
 	reference_to<Phone>(pw).drag();
 }
 void Phone::drag(){
 	int alter = contact_delta.delta_y - contact_delta.prev_y;
-	cout << alter << endl;
+	cout << -alter << endl;
 	if (alter > 10) {
-		up();
+		dw();
 	}
 	else if (alter < -10) {
-		dw();
+		up();
 	}
 
 
@@ -922,13 +1019,20 @@ void Phone::cb_up(Address, Address pw) {
 	reference_to<Phone>(pw).up();
 }
 void Phone::up() {
+	int curr_delta = -48;
+	/*
+	int alter = contact_delta.delta_y - contact_delta.prev_y;
+	if (alter > 8 && alter < 20) curr_delta = delta_1;
+	else if (alter >= 20 && alter <= 45) curr_delta = delta_2;
+	else if (alter > 45) curr_delta = delta_3;
+	*/
 	if (name(9).point(0).y <= 280) return;
 	for (int i = 0; i <= 9; i++) {
-		name(i).move(0, -48);
+		name(i).move(0, curr_delta);
 	}
 	for (int i = 0; i <= 9; i++) {
+		detach(name(i));
 		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
-		else detach(name(i));
 	}
 	redraw();
 }
@@ -936,13 +1040,20 @@ void Phone::cb_dw(Address, Address pw) {
 	reference_to<Phone>(pw).dw();
 }
 void Phone::dw() {
+	int curr_delta = -48;
+	/*
+	int alter = -(contact_delta.delta_y - contact_delta.prev_y);
+	if (alter > 8 && alter < 20) curr_delta = delta_1;
+	else if (alter >= 20 && alter <= 45) curr_delta = delta_2;
+	else if (alter > 45) curr_delta = delta_3;
+	*/
 	if (name(0).point(0).y >= 280) return;
 	for (int i = 0; i <= 9; i++) {
-		name(i).move(0, 48);
+		name(i).move(0, -curr_delta);
 	}
 	for (int i = 0; i <= 9; i++) {
+		detach(name(i));
 		if (name(i).point(0).y >= 280 && name(i).point(0).y <= 376 + 3 * 48) attach(name(i));
-		else detach(name(i));
 	}
 	redraw();
 }
@@ -957,34 +1068,62 @@ void Phone::cb_contact(Address, Address pw) {
 }
 void Phone::contact() {
 	app_open = true;
-	attach(draging);
-	attach(pg_up);
-	attach(pg_dw);
 	Screen_status = inapp;
-	Current_Screen_state.put("Viewing...");
-	attach(Contact);
-	for (int i = 0; i < 6; i++) {
-		attach(name(i));
-	}
+	attach_contact();
 	detach(Desktop);
 	detach(call_contact);
 	time_refresh_2 = true;
 	detach(time_display_2);
 	redraw();
+	string search = search_name.get_string();
+	searching(search);
 	/*--------function and buttons waiting*/
+}
+void Phone::searching(string s) {
+	cout << "searched";
+	if (s == "") return;
+	/*
+	name_0(Point(114, 280), "Bruno Bucciarati"),
+		name_1(Point(114, 328), "Dio Brando"),
+		name_2(Point(114, 376), "Guido Mista"),
+		name_3(Point(114, 376 + 48), "Higashikata Josuke"),
+		name_4(Point(114, 376 + 2 * 48), "King Crimson"),
+		name_5(Point(114, 376 + 3 * 48), "Kujo Jotaro"),
+		name_6(Point(114, 376 + 4 * 48), "Risotto Nero"),
+		name_7(Point(114, 376 + 5 * 48), "Trish Una"),
+		name_8(Point(114, 376 + 6 * 48), "Zeppeli Caesar"),
+		name_9(Point(114, 376 + 7 * 48), "Zoootopia"),
+		*/
+	for (int i = 0; i <= 9; i++) {
+		name(i).set(114, 280 - 48);
+		detach(name(i));
+	}
+	switch (s[0]) {
+	case 'b':
+	case 'B': name(0).set(114, 280); attach(name_0); break;
+	case 'd': 
+	case 'D': name(1).set(114, 280); attach(name_1); break;
+	case 'g':
+	case 'G': name(2).set(114, 280); attach(name_2); break;
+	case 'h':
+	case 'H': name(3).set(114, 280); attach(name_3); break;
+	case 'k':
+	case 'K': name(4).set(114, 280); name(5).set(114, 328); attach(name_4); attach(name_5); break;
+	case 'r':
+	case 'R': name(6).set(114, 280); attach(name_6); break;
+	case 't':
+	case 'T': name(7).set(114, 280); attach(name_7); break;
+	case 'z':
+	case 'Z': name(8).set(114, 280); name(9).set(114, 328); attach(name_8); attach(name_9);  break;
+	}
+	redraw();
 }
 void Phone::unlock()
 {
 	detach_unlock(4);
 	if (app_open) {
-		attach(pg_up);
-		attach(pg_dw);
-		attach(Contact);
 		Screen_status = inapp;
-		Current_Screen_state.put("Viewing...");
-		for (int i = 0; i < 6; i++) {
-			attach(name(i));
-		}
+		attach_contact();
 		redraw();
 	}
 	else {
@@ -1361,12 +1500,10 @@ void Phone::ask_power_off() {
 	case desktop:
 		Screen_status = poweroff; detach(call_contact); detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
 	case inapp:
-		Screen_status = poweroff; detach(pg_up); detach(pg_dw);
-		for (int i = 0; i <= 9; i++) {
-			detach(name(i));
-		}
-		detach(Contact); app_open = false; attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
+		Screen_status = poweroff; detach_contact();
+		app_open = false; attach(Closed_screen); Current_Screen_state.put("poweroff"); redraw(); break;
 	}
+	contact_ini();
 }
 void Phone::screen_alter()
 {
@@ -1396,11 +1533,8 @@ void Phone::screen_alter()
 	case desktop:
 		Screen_status = closed; detach(call_contact); detach(Desktop); detach(time_display_2); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	case inapp:
-		Screen_status = closed; detach(pg_up); detach(pg_dw);
-		for (int i = 0; i <= 9; i++) {
-			detach(name(i));
-		}
-		detach(Contact); attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
+		Screen_status = closed;	detach_contact();
+		attach(Closed_screen); Current_Screen_state.put("closed"); redraw(); break;
 	}
 }
 void Phone::cb_home(Address, Address pw)
@@ -1415,7 +1549,7 @@ void Phone::home()
 		Current_Screen_state.put("passwording..."); redraw(); break;
 	case locked: Screen_status = passwording; detach(Lock_screen); detach(time_display); attach_unlock();
 		Current_Screen_state.put("passwording..."); redraw(); break;
-	case inapp: Screen_status = desktop; detach(pg_up); detach(pg_dw);
+	case inapp: Screen_status = desktop; detach(pg_up); detach(pg_dw); detach(draging);
 		for (int i = 0; i <= 9; i++) {
 			detach(name(i));
 		}

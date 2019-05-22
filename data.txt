@@ -6,25 +6,26 @@ up 10x41 4x121
 dn 4x174
 home 50x50 139x578
 dianchi 276x17 28x75
-app 50x50
-sound 108x108 90x196
+app 50x50                                      
+sound 108x108 90x196	    
 p1 34x151 56x56   p4 34x218 p7 34x284 
 p2 110x151 p5 110x218 p7 110x284
 p3 186x151 p6 186x218 p7 186x284
 p0 110x350
-
 cancel 193x452 42x18
-
 title 276x60 weizhi:y+60
 time 66x66
 通讯录 27x437 46x46
-
-
 进度条 92x288
 112x3
-
-
 contact 1 27 240
 	delta = 29
 	height = 19	
-	
+search 58 173
+contact_detail 17x17
+                      327x265	
+detail return position31x97
+	      70x20
+detail name 122x211
+ 滑动按钮 250x294 0x165
+联系人翻页 132x125 42x32  186x125

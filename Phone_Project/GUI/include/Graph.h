@@ -153,7 +153,7 @@ public:
     Line_style style() const { return ls; }
     void set_fill_color(Color col) { fcolor = col; }
     Color fill_color() const { return fcolor; }
-	
+	void set(int x, int y) { points[0].x = x; points[0].y = y; }
     Point point(int i) const { return points[i]; } // read only access to points
     int number_of_points() const { return int(points.size()); }
 

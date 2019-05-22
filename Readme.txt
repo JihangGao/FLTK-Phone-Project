@@ -10,4 +10,7 @@ time and weather function finished
 dynamic progress bar finished
 contact drag/upbutton/downbutton finished
 contact_detail_page operating...
-basic function required done 90%
+basic function required done£¡£¡£¡£¡£¡£¡
+pc_version finished
+wait for touch_screen version...
+extra function adding (if happy :) )

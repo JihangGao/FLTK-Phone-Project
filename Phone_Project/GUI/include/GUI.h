@@ -237,7 +237,7 @@ namespace Graph_lib {
 			switch (e) {
 				case FL_PUSH:
 					cout << endl << "Button C callback!" << endl;
-					do_callback();
+					//do_callback();
 					break;
 				case FL_RELEASE:
 					cout << endl << "Button A callback!" << endl;

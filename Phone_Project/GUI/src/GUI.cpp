@@ -1047,7 +1047,7 @@ void Phone::dw() {
 	else if (alter >= 20 && alter <= 45) curr_delta = delta_2;
 	else if (alter > 45) curr_delta = delta_3;
 	*/
-	if (name(0).point(0).y >= 280) return;
+	if (name(0).point(0).y >= 280 || name(9).point(0).y < 280) return;
 	for (int i = 0; i <= 9; i++) {
 		name(i).move(0, -curr_delta);
 	}
@@ -1098,6 +1098,7 @@ void Phone::searching(string s) {
 		name(i).set(114, 280 - 48);
 		detach(name(i));
 	}
+
 	switch (s[0]) {
 	case 'b':
 	case 'B': name(0).set(114, 280); attach(name_0); break;
@@ -1617,6 +1618,7 @@ void Phone::sounddn()
 		}
 	}
 }
+/*
 void Phone::cb_pass0(Address, Address pw)
 {
 	reference_to<Phone>(pw).pass0();
@@ -2059,6 +2061,7 @@ void Phone::pass9()
 		}
 	}
 }
+*/
 void Phone::cb_pass_delete(Address, Address pw)
 {
 	reference_to<Phone>(pw).pass_delete();
@@ -2093,6 +2096,376 @@ void Phone::pass_delete()
 	}
 }
 
+void Phone::cb_pass0(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass0();
+}
+void Phone::pass0()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 0;
+	sss << 0;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass1(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass1();
+}
+void Phone::pass1()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 1;
+	sss << 1;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass2(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass2();
+}
+void Phone::pass2()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 2;
+	sss << 2;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass3(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass3();
+}
+void Phone::pass3()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 3;
+	sss << 3;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass4(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass4();
+}
+void Phone::pass4()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 4;
+	sss << 4;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass5(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass5();
+}
+void Phone::pass5()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 5;
+	sss << 5;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass6(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass6();
+}
+void Phone::pass6()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 6;
+	sss << 6;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass7(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass7();
+}
+void Phone::pass7()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 7;
+	sss << 7;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass8(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass8();
+}
+void Phone::pass8()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 8;
+	sss << 8;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
+void Phone::cb_pass9(Address, Address pw)
+{
+	reference_to<Phone>(pw).pass9();
+}
+void Phone::pass9()
+{
+	lock_count++;
+	attach(pass_title(lock_count));
+	detach(pass_title(lock_count - 1));
+	password[lock_count - 1] = 9;
+	sss << 9;
+	password_state.put(sss.str());
+	redraw();
+	wait();
+	show();
+
+	if (lock_count == 4) {
+		password_state.put(sss.str());
+		if (password[0] == pass_word[0] && password[1] == pass_word[1] && password[2] == pass_word[2] && password[3] == pass_word[3]) {
+			unlock();
+		}
+		else {
+			lock_count = 0;
+			attach(pass_titlewrong);
+			password_state.put("Wrong!!!");
+			redraw();
+			wait();
+			show();
+			Sleep(1000);
+			detach(pass_titlewrong);
+			attach(pass_title0);
+			detach(pass_title4);
+			sss.str("");
+			redraw();
+		}
+	}
+}
 
 
 

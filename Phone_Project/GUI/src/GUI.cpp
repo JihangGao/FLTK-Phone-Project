@@ -922,6 +922,7 @@ void Phone::cb_dosearch(Address, Address pw) {
 	reference_to<Phone>(pw).dosearch();
 }
 void Phone::dosearch() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	string t = search_name.get_string();
 	detach(pg_up);
 	detach(pg_dw);
@@ -932,6 +933,7 @@ void Phone::cb_undosearch(Address, Address pw) {
 	reference_to<Phone>(pw).undosearch();
 }
 void Phone::undosearch() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	contact_ini();
 	attach(pg_up);
 	attach(pg_dw);
@@ -946,6 +948,7 @@ void Phone::cb_re_contact(Address, Address pw) {
 	reference_to<Phone>(pw).re_contact();
 }
 void Phone::re_contact(){
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	detach(return_contact);
 	detach(contact_detail);
 	detach(name_show);
@@ -967,6 +970,7 @@ void Phone::re_contact(){
 	redraw();
 }
 void Phone::call_detail(int num) {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int t = find_name_detail(num);
 	if (t == -1) return;
 	detach_contact();
@@ -1019,6 +1023,7 @@ void Phone::cb_up(Address, Address pw) {
 	reference_to<Phone>(pw).up();
 }
 void Phone::up() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int curr_delta = -48;
 	/*
 	int alter = contact_delta.delta_y - contact_delta.prev_y;
@@ -1040,6 +1045,7 @@ void Phone::cb_dw(Address, Address pw) {
 	reference_to<Phone>(pw).dw();
 }
 void Phone::dw() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int curr_delta = -48;
 	/*
 	int alter = -(contact_delta.delta_y - contact_delta.prev_y);
@@ -1067,6 +1073,7 @@ void Phone::cb_contact(Address, Address pw) {
 	reference_to<Phone>(pw).contact();
 }
 void Phone::contact() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	app_open = true;
 	Screen_status = inapp;
 	attach_contact();
@@ -1080,7 +1087,7 @@ void Phone::contact() {
 	/*--------function and buttons waiting*/
 }
 void Phone::searching(string s) {
-	cout << "searched";
+	cout << "searched\n";
 	if (s == "") return;
 	/*
 	name_0(Point(114, 280), "Bruno Bucciarati"),
@@ -1121,6 +1128,7 @@ void Phone::searching(string s) {
 }
 void Phone::unlock()
 {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\unlock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	detach_unlock(4);
 	if (app_open) {
 		Screen_status = inapp;
@@ -1464,6 +1472,7 @@ void Phone::depro() {
 
 }
 void Phone::ask_power_off() {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\beautifulcock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	switch (Screen_status) {
 	case poweroff:
 		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show(); time_refresh = false;
@@ -1508,6 +1517,8 @@ void Phone::ask_power_off() {
 }
 void Phone::screen_alter()
 {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
 	switch (Screen_status) {
 		/*
 	case poweroff:
@@ -1545,6 +1556,7 @@ void Phone::cb_home(Address, Address pw)
 void Phone::home()
 {
 	time_refresh = true;
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	switch (Screen_status) {
 	case closed: Screen_status = passwording; detach(Closed_screen); attach_unlock(); 
 		Current_Screen_state.put("passwording..."); redraw(); break;
@@ -1573,6 +1585,7 @@ void Phone::cb_mute(Address, Address pw)
 void Phone::mute()
 {
 	if (Screen_status != poweroff || Screen_status != closed) {
+		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -1590,6 +1603,7 @@ void Phone::soundup()
 {
 	stringstream in;
 	if (Screen_status != poweroff && Screen_status != closed) {
+		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); Current_Sound_state.put("muted"); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -1608,6 +1622,7 @@ void Phone::sounddn()
 {
 	stringstream in;
 	if (Screen_status != poweroff && Screen_status != closed) {
+		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -2068,6 +2083,8 @@ void Phone::cb_pass_delete(Address, Address pw)
 }
 void Phone::pass_delete()
 {
+	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
 	if (lock_count) {
 		lock_count--;
 		attach(pass_title(lock_count));
@@ -2118,6 +2135,7 @@ void Phone::pass0()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2155,6 +2173,7 @@ void Phone::pass1()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2192,6 +2211,7 @@ void Phone::pass2()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2229,6 +2249,7 @@ void Phone::pass3()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2266,6 +2287,7 @@ void Phone::pass4()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2303,6 +2325,7 @@ void Phone::pass5()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2340,6 +2363,7 @@ void Phone::pass6()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2377,6 +2401,7 @@ void Phone::pass7()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2414,6 +2439,7 @@ void Phone::pass8()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2451,6 +2477,7 @@ void Phone::pass9()
 			unlock();
 		}
 		else {
+			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");

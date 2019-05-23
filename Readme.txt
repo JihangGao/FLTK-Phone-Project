@@ -14,5 +14,6 @@ basic function required done£¡£¡£¡£¡£¡£¡
 pc_version finished
 touch_screen version finished
 BASIC PART ENDS------------------------------------
-sound operating...
+sound finished
+CAIXUKUN SO BEAUTIFUL!!!!
 extra function adding (if happy :) )

@@ -6,6 +6,9 @@
 
 #ifndef GUI_GUARD
 #define GUI_GUARD
+#include<windows.h>
+#include<Mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 #pragma warning(disable : 4996)
 #include "Window.h"
 #include "Graph.h"
@@ -236,11 +239,12 @@ namespace Graph_lib {
 		int handle(int e) {
 			switch (e) {
 				case FL_PUSH:
-					cout << endl << "Button C callback!" << endl;
+					PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					cout << endl << "Button callback!" << endl;
 					//do_callback();
 					break;
 				case FL_RELEASE:
-					cout << endl << "Button A callback!" << endl;
+					cout << endl << "Button callback!" << endl;
 					break;
 				
 				default: return 0;

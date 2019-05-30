@@ -18,11 +18,50 @@ d:\c++\phone_project\phone_project\gui\include\gui.h(223): warning C4244: “初
               Target=int,
               Source=double
           ]
+  Simple_window.cpp
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\gui.h(150): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(155): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(160): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\graph.h(130): warning C4018: “<”: 有符号/无符号不匹配
+  d:\c++\phone_project\phone_project\gui\include\graph.h(130): note: 编译 类 模板 成员函数 "Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)" 时
+  d:\c++\phone_project\phone_project\gui\include\gui.h(140): note: 参见对正在编译的函数 模板 实例化“Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)”的引用
+  d:\c++\phone_project\phone_project\gui\include\gui.h(142): note: 参见对正在编译的 类 模板 实例化 "Graph_lib::Vector_ref<Graph_lib::Button>" 的引用
+  Window.cpp
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\gui.h(150): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(155): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(160): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\src\window.cpp(79): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\src\window.cpp(81): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\graph.h(130): warning C4018: “<”: 有符号/无符号不匹配
+  d:\c++\phone_project\phone_project\gui\include\graph.h(130): note: 编译 类 模板 成员函数 "Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)" 时
+  d:\c++\phone_project\phone_project\gui\include\gui.h(140): note: 参见对正在编译的函数 模板 实例化“Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)”的引用
+  d:\c++\phone_project\phone_project\gui\include\gui.h(142): note: 参见对正在编译的 类 模板 实例化 "Graph_lib::Vector_ref<Graph_lib::Button>" 的引用
+  Phone_Project.cpp
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(45): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4305: “初始化”: 从“Graph_lib::Color::Transparency”到“char”截断
+d:\c++\phone_project\phone_project\gui\include\graph.h(47): warning C4309: “初始化”: 截断常量值
+d:\c++\phone_project\phone_project\gui\include\gui.h(150): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(155): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\gui.h(160): warning C4018: “<”: 有符号/无符号不匹配
+d:\c++\phone_project\phone_project\gui\include\graph.h(130): warning C4018: “<”: 有符号/无符号不匹配
+  d:\c++\phone_project\phone_project\gui\include\graph.h(130): note: 编译 类 模板 成员函数 "Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)" 时
+  d:\c++\phone_project\phone_project\gui\include\gui.h(140): note: 参见对正在编译的函数 模板 实例化“Graph_lib::Vector_ref<Graph_lib::Button>::~Vector_ref(void)”的引用
+  d:\c++\phone_project\phone_project\gui\include\gui.h(142): note: 参见对正在编译的 类 模板 实例化 "Graph_lib::Vector_ref<Graph_lib::Button>" 的引用
+  正在生成代码...
 d:\c++\phone_project\phone_project\gui\src\gui.cpp(453): warning C4715: “Graph_lib::Token_stream::get”: 不是所有的控件路径都返回值
 d:\c++\phone_project\phone_project\gui\src\gui.cpp(511): warning C4715: “Graph_lib::primary”: 不是所有的控件路径都返回值
 d:\c++\phone_project\phone_project\gui\src\gui.cpp(605): warning C4715: “Graph_lib::calculate”: 不是所有的控件路径都返回值
-d:\c++\phone_project\phone_project\gui\src\gui.cpp(1212): warning C4715: “Graph_lib::Phone::show_sound”: 不是所有的控件路径都返回值
-d:\c++\phone_project\phone_project\gui\include\gui.h(497): warning C4715: “Graph_lib::Phone::name”: 不是所有的控件路径都返回值
-d:\c++\phone_project\phone_project\gui\include\gui.h(405): warning C4715: “Graph_lib::Phone::cont”: 不是所有的控件路径都返回值
-d:\c++\phone_project\phone_project\gui\include\gui.h(676): warning C4715: “Graph_lib::Phone::pass_title”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(1221): warning C4715: “Graph_lib::Phone::show_sound”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\include\gui.h(500): warning C4715: “Graph_lib::Phone::name”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\include\gui.h(408): warning C4715: “Graph_lib::Phone::cont”: 不是所有的控件路径都返回值
+d:\c++\phone_project\phone_project\gui\include\gui.h(679): warning C4715: “Graph_lib::Phone::pass_title”: 不是所有的控件路径都返回值
   Phone_Project.vcxproj -> D:\C++\Phone_Project\Debug\Phone_Project.exe

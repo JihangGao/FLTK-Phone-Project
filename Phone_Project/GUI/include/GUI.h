@@ -241,7 +241,7 @@ namespace Graph_lib {
 				case FL_PUSH:
 					PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					cout << endl << "Button callback!" << endl;
-					//do_callback();
+					do_callback();
 					break;
 				case FL_RELEASE:
 					cout << endl << "Button callback!" << endl;
@@ -351,6 +351,9 @@ namespace Graph_lib {
 	{
 		Phone();
 	private:
+		Button quit;
+		void quitt();
+		static void cb_quit(Address, Address);
 		appButton pass_1;
 		appButton pass_2;
 		appButton pass_3;

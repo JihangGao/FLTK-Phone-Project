@@ -16,4 +16,4 @@ touch_screen version finished
 BASIC PART ENDS------------------------------------
 sound finished
 CAIXUKUN SO BEAUTIFUL!!!!
-extra function adding (if happy :) )
+final finished------------------------------------------

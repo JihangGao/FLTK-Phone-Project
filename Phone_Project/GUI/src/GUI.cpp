@@ -684,186 +684,186 @@ int contactbar::handle(int e) {
 //------------------------------------------------------------------------------
 Phone::Phone() :
 	Window(Point(0, 0), 600, 960, "Phone"),
-	Phone_fraction(Point(0, 0), "D:\\C++\\Phone_Project\\images\\fraction_bg.jpg"),
+	Phone_fraction(Point(0, 0), "../images/fraction_bg.jpg"),
 	//home_button(Point(209, 520), 10, 10, "", cb_back_to_home)
 	Lock_button(Point(318, 120), 9, 45, "", cb_switchon),
-	Lock_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\lock.jpg"),
-	Closed_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\closed_bg.jpg"),
-	Starting_p0(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p0.jpg"),
-	Starting_p1(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p1.jpg"),
-	Starting_p2(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p2.jpg"),
-	Starting_p3(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting_p3.jpg"),
-	Starting_screen(Point(27, 75), "D:\\C++\\Phone_Project\\images\\starting.jpg"),
+	Lock_screen(Point(27, 75), "../images/lock.jpg"),
+	Closed_screen(Point(27, 75), "../images/closed_bg.jpg"),
+	Starting_p0(Point(27, 75), "../images/starting_p0.jpg"),
+	Starting_p1(Point(27, 75), "../images/starting_p1.jpg"),
+	Starting_p2(Point(27, 75), "../images/starting_p2.jpg"),
+	Starting_p3(Point(27, 75), "../images/starting_p3.jpg"),
+	Starting_screen(Point(27, 75), "../images/starting.jpg"),
 	Up_button(Point(4, 121), 10, 41, "", cb_soundup),
 	Down_button(Point(4, 174), 10, 41, "", cb_sounddn),
 	Mute_button(Point(5, 74), 8, 32, "", cb_mute),
 	Current_Screen_state(Point(200, 700), 100, 40, "Current Screen State:"),
 	Current_Sound_state(Point(200, 800), 100, 40, "Current Sound State:"),
-	Sound_screen_0(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s0.jpg"),
-	Sound_screen_1(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s1.jpg"),
-	Sound_screen_2(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s2.jpg"),
-	Sound_screen_3(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s3.jpg"),
-	Sound_screen_4(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s4.jpg"),
-	Sound_screen_5(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s5.jpg"),
-	Sound_screen_6(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s6.jpg"),
-	Sound_screen_7(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s7.jpg"),
-	Sound_screen_8(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s8.jpg"),
-	Sound_screen_9(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s9.jpg"),
-	Sound_screen_10(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s10.jpg"),
-	Sound_screen_11(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s11.jpg"),
-	Sound_screen_12(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s12.jpg"),
-	Sound_screen_13(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s13.jpg"),
-	Sound_screen_14(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s14.jpg"),
-	Sound_screen_15(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s15.jpg"),
-	Sound_screen_16(Point(117, 271), "D:\\C++\\Phone_Project\\images\\s16.jpg"),
-	p1(Point(61, 226), "D:\\C++\\Phone_Project\\images\\p1.jpg"),
+	Sound_screen_0(Point(117, 271), "../images/s0.jpg"),
+	Sound_screen_1(Point(117, 271), "../images/s1.jpg"),
+	Sound_screen_2(Point(117, 271), "../images/s2.jpg"),
+	Sound_screen_3(Point(117, 271), "../images/s3.jpg"),
+	Sound_screen_4(Point(117, 271), "../images/s4.jpg"),
+	Sound_screen_5(Point(117, 271), "../images/s5.jpg"),
+	Sound_screen_6(Point(117, 271), "../images/s6.jpg"),
+	Sound_screen_7(Point(117, 271), "../images/s7.jpg"),
+	Sound_screen_8(Point(117, 271), "../images/s8.jpg"),
+	Sound_screen_9(Point(117, 271), "../images/s9.jpg"),
+	Sound_screen_10(Point(117, 271), "../images/s10.jpg"),
+	Sound_screen_11(Point(117, 271), "../images/s11.jpg"),
+	Sound_screen_12(Point(117, 271), "../images/s12.jpg"),
+	Sound_screen_13(Point(117, 271), "../images/s13.jpg"),
+	Sound_screen_14(Point(117, 271), "../images/s14.jpg"),
+	Sound_screen_15(Point(117, 271), "../images/s15.jpg"),
+	Sound_screen_16(Point(117, 271), "../images/s16.jpg"),
+	p1(Point(61, 226), "../images/p1.jpg"),
 	pass_1(Point(61, 226), 56, 56, "", cb_pass1),
-	p2(Point(137, 226), "D:\\C++\\Phone_Project\\images\\p2.jpg"),
+	p2(Point(137, 226), "../images/p2.jpg"),
 	pass_2(Point(137, 226), 56, 56, "", cb_pass2),
-	p3(Point(213, 226), "D:\\C++\\Phone_Project\\images\\p3.jpg"),
+	p3(Point(213, 226), "../images/p3.jpg"),
 	pass_3(Point(213, 226), 56, 56, "", cb_pass3),
-	p4(Point(61, 293), "D:\\C++\\Phone_Project\\images\\p4.jpg"),
+	p4(Point(61, 293), "../images/p4.jpg"),
 	pass_4(Point(61, 293), 56, 56, "", cb_pass4),
-	p5(Point(137, 293), "D:\\C++\\Phone_Project\\images\\p5.jpg"),
+	p5(Point(137, 293), "../images/p5.jpg"),
 	pass_5(Point(137, 293), 56, 56, "", cb_pass5),
-	p6(Point(213, 293), "D:\\C++\\Phone_Project\\images\\p6.jpg"),
+	p6(Point(213, 293), "../images/p6.jpg"),
 	pass_6(Point(213, 293), 56, 56, "", cb_pass6),
-	p7(Point(61, 359), "D:\\C++\\Phone_Project\\images\\p7.jpg"),
+	p7(Point(61, 359), "../images/p7.jpg"),
 	pass_7(Point(61, 359), 56, 56, "", cb_pass7),
-	p8(Point(137, 359), "D:\\C++\\Phone_Project\\images\\p8.jpg"),
+	p8(Point(137, 359), "../images/p8.jpg"),
 	pass_8(Point(137, 359), 56, 56, "", cb_pass8),
-	p9(Point(213, 359), "D:\\C++\\Phone_Project\\images\\p9.jpg"),
+	p9(Point(213, 359), "../images/p9.jpg"),
 	pass_9(Point(213, 359), 56, 56, "", cb_pass9),
-	p0(Point(137, 425), "D:\\C++\\Phone_Project\\images\\p0.jpg"),
+	p0(Point(137, 425), "../images/p0.jpg"),
 	pass_0(Point(137, 425), 56, 56, "", cb_pass0),
-	Password(Point(27, 75), "D:\\C++\\Phone_Project\\images\\password.jpg"),
-	pass_title1(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title1.jpg"),
-	pass_title2(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title2.jpg"),
-	pass_title3(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title3.jpg"),
-	pass_title4(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title4.jpg"),
-	pass_title0(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_title0.jpg"),
-	pass_titlewrong(Point(27, 135), "D:\\C++\\Phone_Project\\images\\pass_titlewrong.jpg"),
-	Desktop(Point(27, 75), "D:\\C++\\Phone_Project\\images\\desktop.jpg"),
+	Password(Point(27, 75), "../images/password.jpg"),
+	pass_title1(Point(27, 135), "../images/pass_title1.jpg"),
+	pass_title2(Point(27, 135), "../images/pass_title2.jpg"),
+	pass_title3(Point(27, 135), "../images/pass_title3.jpg"),
+	pass_title4(Point(27, 135), "../images/pass_title4.jpg"),
+	pass_title0(Point(27, 135), "../images/pass_title0.jpg"),
+	pass_titlewrong(Point(27, 135), "../images/pass_titlewrong.jpg"),
+	Desktop(Point(27, 75), "../images/desktop.jpg"),
 	home_button(Point(139, 578), 50, 50, "home", cb_home),
 	//home_button(Point(500, 200), 50, 50, "home", cb_home),
 	password_state(Point(200, 900), 100, 40, "password"),
 	passdelete(Point(220, 527), 42, 18, "", cb_pass_delete),
 	time_display(Point(101, 195)),
 	time_display_2(Point(150, 90)),
-	pro__0(Point(119 - 1, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_0(Point(119 + 0, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_1(Point(119 + 1, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_2(Point(119 + 2, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_3(Point(119 + 3, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_4(Point(119 + 4, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_5(Point(119 + 5, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_6(Point(119 + 6, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_7(Point(119 + 7, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_8(Point(119 + 8, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_9(Point(119 + 9, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_10(Point(119 + 10, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_11(Point(119 + 11, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_12(Point(119 + 12, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_13(Point(119 + 13, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_14(Point(119 + 14, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_15(Point(119 + 15, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_16(Point(119 + 16, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_17(Point(119 + 17, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_18(Point(119 + 18, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_19(Point(119 + 19, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_20(Point(119 + 20, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_21(Point(119 + 21, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_22(Point(119 + 22, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_23(Point(119 + 23, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_24(Point(119 + 24, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_25(Point(119 + 25, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_26(Point(119 + 26, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_27(Point(119 + 27, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_28(Point(119 + 28, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_29(Point(119 + 29, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_30(Point(119 + 30, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_31(Point(119 + 31, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_32(Point(119 + 32, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_33(Point(119 + 33, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_34(Point(119 + 34, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_35(Point(119 + 35, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_36(Point(119 + 36, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_37(Point(119 + 37, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_38(Point(119 + 38, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_39(Point(119 + 39, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_40(Point(119 + 40, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_41(Point(119 + 41, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_42(Point(119 + 42, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_43(Point(119 + 43, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_44(Point(119 + 44, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_45(Point(119 + 45, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_46(Point(119 + 46, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_47(Point(119 + 47, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_48(Point(119 + 48, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_49(Point(119 + 49, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_50(Point(119 + 50, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_51(Point(119 + 51, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_52(Point(119 + 52, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_53(Point(119 + 53, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_54(Point(119 + 54, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_55(Point(119 + 55, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_56(Point(119 + 56, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_57(Point(119 + 57, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_58(Point(119 + 58, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_59(Point(119 + 59, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_60(Point(119 + 60, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_61(Point(119 + 61, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_62(Point(119 + 62, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_63(Point(119 + 63, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_64(Point(119 + 64, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_65(Point(119 + 65, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_66(Point(119 + 66, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_67(Point(119 + 67, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_68(Point(119 + 68, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_69(Point(119 + 69, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_70(Point(119 + 70, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_71(Point(119 + 71, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_72(Point(119 + 72, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_73(Point(119 + 73, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_74(Point(119 + 74, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_75(Point(119 + 75, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_76(Point(119 + 76, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_77(Point(119 + 77, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_78(Point(119 + 78, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_79(Point(119 + 79, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_80(Point(119 + 80, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_81(Point(119 + 81, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_82(Point(119 + 82, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_83(Point(119 + 83, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_84(Point(119 + 84, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_85(Point(119 + 85, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_86(Point(119 + 86, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_87(Point(119 + 87, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_88(Point(119 + 88, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_89(Point(119 + 89, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_90(Point(119 + 90, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_91(Point(119 + 91, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_92(Point(119 + 92, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_93(Point(119 + 93, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_94(Point(119 + 94, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_95(Point(119 + 95, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_96(Point(119 + 96, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_97(Point(119 + 97, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_98(Point(119 + 98, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_99(Point(119 + 99, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_100(Point(119 + 100, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_101(Point(119 + 101, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_102(Point(119 + 102, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_103(Point(119 + 103, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_104(Point(119 + 104, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_105(Point(119 + 105, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_106(Point(119 + 106, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_107(Point(119 + 107, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_108(Point(119 + 108, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_109(Point(119 + 109, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_110(Point(119 + 110, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	pro_111(Point(119 + 111, 363), "D:\\C++\\Phone_Project\\images\\pro_1.jpg"),
-	Contact(Point(27, 75), "D:\\C++\\Phone_Project\\images\\contact.jpg"),
+	pro__0(Point(119 - 1, 363), "../images/pro_1.jpg"),
+	pro_0(Point(119 + 0, 363), "../images/pro_1.jpg"),
+	pro_1(Point(119 + 1, 363), "../images/pro_1.jpg"),
+	pro_2(Point(119 + 2, 363), "../images/pro_1.jpg"),
+	pro_3(Point(119 + 3, 363), "../images/pro_1.jpg"),
+	pro_4(Point(119 + 4, 363), "../images/pro_1.jpg"),
+	pro_5(Point(119 + 5, 363), "../images/pro_1.jpg"),
+	pro_6(Point(119 + 6, 363), "../images/pro_1.jpg"),
+	pro_7(Point(119 + 7, 363), "../images/pro_1.jpg"),
+	pro_8(Point(119 + 8, 363), "../images/pro_1.jpg"),
+	pro_9(Point(119 + 9, 363), "../images/pro_1.jpg"),
+	pro_10(Point(119 + 10, 363), "../images/pro_1.jpg"),
+	pro_11(Point(119 + 11, 363), "../images/pro_1.jpg"),
+	pro_12(Point(119 + 12, 363), "../images/pro_1.jpg"),
+	pro_13(Point(119 + 13, 363), "../images/pro_1.jpg"),
+	pro_14(Point(119 + 14, 363), "../images/pro_1.jpg"),
+	pro_15(Point(119 + 15, 363), "../images/pro_1.jpg"),
+	pro_16(Point(119 + 16, 363), "../images/pro_1.jpg"),
+	pro_17(Point(119 + 17, 363), "../images/pro_1.jpg"),
+	pro_18(Point(119 + 18, 363), "../images/pro_1.jpg"),
+	pro_19(Point(119 + 19, 363), "../images/pro_1.jpg"),
+	pro_20(Point(119 + 20, 363), "../images/pro_1.jpg"),
+	pro_21(Point(119 + 21, 363), "../images/pro_1.jpg"),
+	pro_22(Point(119 + 22, 363), "../images/pro_1.jpg"),
+	pro_23(Point(119 + 23, 363), "../images/pro_1.jpg"),
+	pro_24(Point(119 + 24, 363), "../images/pro_1.jpg"),
+	pro_25(Point(119 + 25, 363), "../images/pro_1.jpg"),
+	pro_26(Point(119 + 26, 363), "../images/pro_1.jpg"),
+	pro_27(Point(119 + 27, 363), "../images/pro_1.jpg"),
+	pro_28(Point(119 + 28, 363), "../images/pro_1.jpg"),
+	pro_29(Point(119 + 29, 363), "../images/pro_1.jpg"),
+	pro_30(Point(119 + 30, 363), "../images/pro_1.jpg"),
+	pro_31(Point(119 + 31, 363), "../images/pro_1.jpg"),
+	pro_32(Point(119 + 32, 363), "../images/pro_1.jpg"),
+	pro_33(Point(119 + 33, 363), "../images/pro_1.jpg"),
+	pro_34(Point(119 + 34, 363), "../images/pro_1.jpg"),
+	pro_35(Point(119 + 35, 363), "../images/pro_1.jpg"),
+	pro_36(Point(119 + 36, 363), "../images/pro_1.jpg"),
+	pro_37(Point(119 + 37, 363), "../images/pro_1.jpg"),
+	pro_38(Point(119 + 38, 363), "../images/pro_1.jpg"),
+	pro_39(Point(119 + 39, 363), "../images/pro_1.jpg"),
+	pro_40(Point(119 + 40, 363), "../images/pro_1.jpg"),
+	pro_41(Point(119 + 41, 363), "../images/pro_1.jpg"),
+	pro_42(Point(119 + 42, 363), "../images/pro_1.jpg"),
+	pro_43(Point(119 + 43, 363), "../images/pro_1.jpg"),
+	pro_44(Point(119 + 44, 363), "../images/pro_1.jpg"),
+	pro_45(Point(119 + 45, 363), "../images/pro_1.jpg"),
+	pro_46(Point(119 + 46, 363), "../images/pro_1.jpg"),
+	pro_47(Point(119 + 47, 363), "../images/pro_1.jpg"),
+	pro_48(Point(119 + 48, 363), "../images/pro_1.jpg"),
+	pro_49(Point(119 + 49, 363), "../images/pro_1.jpg"),
+	pro_50(Point(119 + 50, 363), "../images/pro_1.jpg"),
+	pro_51(Point(119 + 51, 363), "../images/pro_1.jpg"),
+	pro_52(Point(119 + 52, 363), "../images/pro_1.jpg"),
+	pro_53(Point(119 + 53, 363), "../images/pro_1.jpg"),
+	pro_54(Point(119 + 54, 363), "../images/pro_1.jpg"),
+	pro_55(Point(119 + 55, 363), "../images/pro_1.jpg"),
+	pro_56(Point(119 + 56, 363), "../images/pro_1.jpg"),
+	pro_57(Point(119 + 57, 363), "../images/pro_1.jpg"),
+	pro_58(Point(119 + 58, 363), "../images/pro_1.jpg"),
+	pro_59(Point(119 + 59, 363), "../images/pro_1.jpg"),
+	pro_60(Point(119 + 60, 363), "../images/pro_1.jpg"),
+	pro_61(Point(119 + 61, 363), "../images/pro_1.jpg"),
+	pro_62(Point(119 + 62, 363), "../images/pro_1.jpg"),
+	pro_63(Point(119 + 63, 363), "../images/pro_1.jpg"),
+	pro_64(Point(119 + 64, 363), "../images/pro_1.jpg"),
+	pro_65(Point(119 + 65, 363), "../images/pro_1.jpg"),
+	pro_66(Point(119 + 66, 363), "../images/pro_1.jpg"),
+	pro_67(Point(119 + 67, 363), "../images/pro_1.jpg"),
+	pro_68(Point(119 + 68, 363), "../images/pro_1.jpg"),
+	pro_69(Point(119 + 69, 363), "../images/pro_1.jpg"),
+	pro_70(Point(119 + 70, 363), "../images/pro_1.jpg"),
+	pro_71(Point(119 + 71, 363), "../images/pro_1.jpg"),
+	pro_72(Point(119 + 72, 363), "../images/pro_1.jpg"),
+	pro_73(Point(119 + 73, 363), "../images/pro_1.jpg"),
+	pro_74(Point(119 + 74, 363), "../images/pro_1.jpg"),
+	pro_75(Point(119 + 75, 363), "../images/pro_1.jpg"),
+	pro_76(Point(119 + 76, 363), "../images/pro_1.jpg"),
+	pro_77(Point(119 + 77, 363), "../images/pro_1.jpg"),
+	pro_78(Point(119 + 78, 363), "../images/pro_1.jpg"),
+	pro_79(Point(119 + 79, 363), "../images/pro_1.jpg"),
+	pro_80(Point(119 + 80, 363), "../images/pro_1.jpg"),
+	pro_81(Point(119 + 81, 363), "../images/pro_1.jpg"),
+	pro_82(Point(119 + 82, 363), "../images/pro_1.jpg"),
+	pro_83(Point(119 + 83, 363), "../images/pro_1.jpg"),
+	pro_84(Point(119 + 84, 363), "../images/pro_1.jpg"),
+	pro_85(Point(119 + 85, 363), "../images/pro_1.jpg"),
+	pro_86(Point(119 + 86, 363), "../images/pro_1.jpg"),
+	pro_87(Point(119 + 87, 363), "../images/pro_1.jpg"),
+	pro_88(Point(119 + 88, 363), "../images/pro_1.jpg"),
+	pro_89(Point(119 + 89, 363), "../images/pro_1.jpg"),
+	pro_90(Point(119 + 90, 363), "../images/pro_1.jpg"),
+	pro_91(Point(119 + 91, 363), "../images/pro_1.jpg"),
+	pro_92(Point(119 + 92, 363), "../images/pro_1.jpg"),
+	pro_93(Point(119 + 93, 363), "../images/pro_1.jpg"),
+	pro_94(Point(119 + 94, 363), "../images/pro_1.jpg"),
+	pro_95(Point(119 + 95, 363), "../images/pro_1.jpg"),
+	pro_96(Point(119 + 96, 363), "../images/pro_1.jpg"),
+	pro_97(Point(119 + 97, 363), "../images/pro_1.jpg"),
+	pro_98(Point(119 + 98, 363), "../images/pro_1.jpg"),
+	pro_99(Point(119 + 99, 363), "../images/pro_1.jpg"),
+	pro_100(Point(119 + 100, 363), "../images/pro_1.jpg"),
+	pro_101(Point(119 + 101, 363), "../images/pro_1.jpg"),
+	pro_102(Point(119 + 102, 363), "../images/pro_1.jpg"),
+	pro_103(Point(119 + 103, 363), "../images/pro_1.jpg"),
+	pro_104(Point(119 + 104, 363), "../images/pro_1.jpg"),
+	pro_105(Point(119 + 105, 363), "../images/pro_1.jpg"),
+	pro_106(Point(119 + 106, 363), "../images/pro_1.jpg"),
+	pro_107(Point(119 + 107, 363), "../images/pro_1.jpg"),
+	pro_108(Point(119 + 108, 363), "../images/pro_1.jpg"),
+	pro_109(Point(119 + 109, 363), "../images/pro_1.jpg"),
+	pro_110(Point(119 + 110, 363), "../images/pro_1.jpg"),
+	pro_111(Point(119 + 111, 363), "../images/pro_1.jpg"),
+	Contact(Point(27, 75), "../images/contact.jpg"),
 	call_contact(Point(54, 512), 46, 46, "", cb_contact),
 	name_0(Point(114, 280), "Bruno Bucciarati"),
 	name_1(Point(114, 328), "Dio Brando"),
@@ -879,7 +879,7 @@ Phone::Phone() :
 	pg_dw(Point(132+27, 125+75), 42, 32, "", cb_dw),//up
 	draging(Point(27, 165+75), 250, 294, "drag", cb_drag),
 	search_name(Point(400, 200), 70, 20, "search:"),
-	contact_detail(Point(27, 75), "D:\\C++\\Phone_Project\\images\\contact_detail.jpg"),
+	contact_detail(Point(27, 75), "../images/contact_detail.jpg"),
 	name_show(Point(125, 205), ""),
 	return_contact(Point(31, 97), 70, 20, "", cb_re_contact),
 	detail_0(Point(279, 265), 17, 17, "", cb_call_detail_0),
@@ -889,8 +889,10 @@ Phone::Phone() :
 	detail_4(Point(279, 265 + 4 * 48), 17, 17, "", cb_call_detail_4),
 	detail_5(Point(279, 265 + 5 * 48), 17, 17, "", cb_call_detail_5),
 	do_search(Point(400, 300), 50, 50, "Search!", cb_dosearch),
-	undo_search(Point(470, 300), 50, 50, "clear!", cb_undosearch)
+	undo_search(Point(470, 300), 50, 50, "clear!", cb_undosearch),
+	quit(Point(550,0), 50, 20, "Quit", cb_quit)
 {
+		attach(quit);
 	for (int i = 0; i <= 9; i++) {
 		name(i).set_color(Color::black);
 		name(i).set_font(Font::helvetica);
@@ -918,11 +920,17 @@ Phone::Phone() :
 	lock_count = 0;
 	power_off_try = 1;
 };
+void Phone::cb_quit(Address, Address pw) {
+	reference_to<Phone>(pw).quitt();
+}
+void Phone::quitt() {
+	exit(0);
+}
 void Phone::cb_dosearch(Address, Address pw) {
 	reference_to<Phone>(pw).dosearch();
 }
 void Phone::dosearch() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	string t = search_name.get_string();
 	detach(pg_up);
 	detach(pg_dw);
@@ -933,7 +941,7 @@ void Phone::cb_undosearch(Address, Address pw) {
 	reference_to<Phone>(pw).undosearch();
 }
 void Phone::undosearch() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	contact_ini();
 	attach(pg_up);
 	attach(pg_dw);
@@ -948,7 +956,7 @@ void Phone::cb_re_contact(Address, Address pw) {
 	reference_to<Phone>(pw).re_contact();
 }
 void Phone::re_contact(){
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	detach(return_contact);
 	detach(contact_detail);
 	detach(name_show);
@@ -970,7 +978,7 @@ void Phone::re_contact(){
 	redraw();
 }
 void Phone::call_detail(int num) {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int t = find_name_detail(num);
 	if (t == -1) return;
 	detach_contact();
@@ -1023,7 +1031,7 @@ void Phone::cb_up(Address, Address pw) {
 	reference_to<Phone>(pw).up();
 }
 void Phone::up() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int curr_delta = -48;
 	/*
 	int alter = contact_delta.delta_y - contact_delta.prev_y;
@@ -1045,7 +1053,7 @@ void Phone::cb_dw(Address, Address pw) {
 	reference_to<Phone>(pw).dw();
 }
 void Phone::dw() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int curr_delta = -48;
 	/*
 	int alter = -(contact_delta.delta_y - contact_delta.prev_y);
@@ -1073,7 +1081,7 @@ void Phone::cb_contact(Address, Address pw) {
 	reference_to<Phone>(pw).contact();
 }
 void Phone::contact() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	app_open = true;
 	Screen_status = inapp;
 	attach_contact();
@@ -1128,7 +1136,7 @@ void Phone::searching(string s) {
 }
 void Phone::unlock()
 {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\unlock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/unlock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	detach_unlock(4);
 	if (app_open) {
 		Screen_status = inapp;
@@ -1472,7 +1480,7 @@ void Phone::depro() {
 
 }
 void Phone::ask_power_off() {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\beautifulcock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/beautifulcock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	switch (Screen_status) {
 	case poweroff:
 		Screen_status = starting; detach(Closed_screen); attach(Starting_screen); Current_Screen_state.put("starting......"); redraw(); wait(); show(); time_refresh = false;
@@ -1517,8 +1525,7 @@ void Phone::ask_power_off() {
 }
 void Phone::screen_alter()
 {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
-
+	if (Screen_status != poweroff) PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	switch (Screen_status) {
 		/*
 	case poweroff:
@@ -1556,7 +1563,7 @@ void Phone::cb_home(Address, Address pw)
 void Phone::home()
 {
 	time_refresh = true;
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	switch (Screen_status) {
 	case closed: Screen_status = passwording; detach(Closed_screen); attach_unlock(); 
 		Current_Screen_state.put("passwording..."); redraw(); break;
@@ -1585,7 +1592,7 @@ void Phone::cb_mute(Address, Address pw)
 void Phone::mute()
 {
 	if (Screen_status != poweroff || Screen_status != closed) {
-		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -1603,7 +1610,7 @@ void Phone::soundup()
 {
 	stringstream in;
 	if (Screen_status != poweroff && Screen_status != closed) {
-		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); Current_Sound_state.put("muted"); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -1622,7 +1629,7 @@ void Phone::sounddn()
 {
 	stringstream in;
 	if (Screen_status != poweroff && Screen_status != closed) {
-		PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		switch (Sound_status) {
 		case muted: Sound_status = Sound_saved; attach(show_sound(Sound_status)); in << Sound_status; Current_Sound_state.put(in.str()); redraw(); wait(); show();
 			Sleep(400); detach(show_sound(Sound_status)); break;
@@ -1633,7 +1640,7 @@ void Phone::sounddn()
 		}
 	}
 }
-/*
+/**/
 void Phone::cb_pass0(Address, Address pw)
 {
 	reference_to<Phone>(pw).pass0();
@@ -2076,14 +2083,14 @@ void Phone::pass9()
 		}
 	}
 }
-*/
+
 void Phone::cb_pass_delete(Address, Address pw)
 {
 	reference_to<Phone>(pw).pass_delete();
 }
 void Phone::pass_delete()
 {
-	PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("../images/lock.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	if (lock_count) {
 		lock_count--;
@@ -2112,7 +2119,7 @@ void Phone::pass_delete()
 		redraw();
 	}
 }
-
+/*
 void Phone::cb_pass0(Address, Address pw)
 {
 	reference_to<Phone>(pw).pass0();
@@ -2135,7 +2142,7 @@ void Phone::pass0()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2173,7 +2180,7 @@ void Phone::pass1()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2211,7 +2218,7 @@ void Phone::pass2()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2249,7 +2256,7 @@ void Phone::pass3()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2287,7 +2294,7 @@ void Phone::pass4()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2325,7 +2332,7 @@ void Phone::pass5()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2363,7 +2370,7 @@ void Phone::pass6()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2401,7 +2408,7 @@ void Phone::pass7()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2439,7 +2446,7 @@ void Phone::pass8()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2477,7 +2484,7 @@ void Phone::pass9()
 			unlock();
 		}
 		else {
-			PlaySound(TEXT("D:\\C++\\Phone_Project\\images\\pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(TEXT("../images/pass_wrong.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			lock_count = 0;
 			attach(pass_titlewrong);
 			password_state.put("Wrong!!!");
@@ -2493,7 +2500,7 @@ void Phone::pass9()
 		}
 	}
 }
-
+*/
 
 
 //------------------------------------------------------------------------------

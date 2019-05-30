@@ -1,0 +1,11 @@
+﻿  stdafx.cpp
+  Graph.cpp
+d:\c++\phone_project\phone_project\gui\src\graph.cpp(811): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  GUI.cpp
+d:\c++\phone_project\phone_project\gui\src\gui.cpp(2517): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  Simple_window.cpp
+d:\c++\phone_project\phone_project\gui\src\simple_window.cpp(57): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  Window.cpp
+d:\c++\phone_project\phone_project\gui\src\window.cpp(99): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
+  Phone_Project.cpp
+d:\c++\phone_project\phone_project\phone_project.cpp(175): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
